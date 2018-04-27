@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.empty')
+
+@section('title', 'LogMovie - Sing Up')
 
 @section('content')
 <div class="container">
@@ -69,6 +71,9 @@
                             </div>
                         </div>
                     </form>
+                    <a href="{{url('/auth/google')}}" class="btn btn-primary text-white full-width">
+                        Sign in with Google
+                    </a>
                 </div>
             </div>
         </div>

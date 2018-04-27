@@ -36,7 +36,7 @@
                             <label for="password">Password</label>
                             <input id='password' name="password" type="password"
                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                   value="{{ old('password') }}" required autofocus>
+                                   required autofocus>
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -70,10 +70,9 @@
                         <div class="awesome-divider" data-label="or"></div>
                     </div>
 
-                    <a type="submit" class="btn btn-primary text-white full-width">
+                    <a href="{{url('/auth/google')}}" class="btn btn-primary text-white full-width">
                         Sign in with Google
                     </a>
-
                 </div>
             </div>
         </div>
