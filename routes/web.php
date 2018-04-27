@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/mod',"ModController@index");
+Route::get('/movies/create','MoviesController@create');
+Route::post('/movies/store','MoviesController@store');
