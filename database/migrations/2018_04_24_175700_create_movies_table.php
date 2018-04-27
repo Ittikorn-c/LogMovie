@@ -16,6 +16,8 @@ class CreateMoviesTable extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('vdo');
+            $table->string('cover_image');
             $table->string('storyline');
             $table->string('budget');
             $table->string('opening');
@@ -24,7 +26,7 @@ class CreateMoviesTable extends Migration
             $table->unsignedInteger('runtime');
             $table->boolean('color');
             $table->string('aspect_ratio');
-            $table->timestamps();  
+            $table->timestamps();
         });
     }
 

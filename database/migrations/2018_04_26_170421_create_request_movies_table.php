@@ -21,6 +21,7 @@ class CreateRequestMoviesTable extends Migration
             $table->string('opening');
             $table->string('gross');
             $table->string('cumulative');
+            $table->unsignedInteger('runtime');
             $table->boolean('color');
             $table->string('aspect_ratio');
             $table->unsignedInteger('requester');
@@ -29,7 +30,7 @@ class CreateRequestMoviesTable extends Migration
 
             $table->foreign('requester')
             ->references('id')
-            ->on('user')
+            ->on('users')
             ->onDelete('cascade');
         });
     }
