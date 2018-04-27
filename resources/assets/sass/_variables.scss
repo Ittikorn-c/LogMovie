@@ -1,8 +1,17 @@
-
 // Body
-$body-bg: #f5f8fa;
+$body-bg: #f2f2f2;
+
+// Color
+$nice-orange: #f26b3a;
+$nice-blue: #4285f4;
+$nice-black: #282828;
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Open Sans", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+$theme-colors: (
+        "primary": $nice-blue,
+        "warning": $nice-orange
+);
