@@ -5,8 +5,8 @@ use Faker\Generator as Faker;
 $factory->define(App\Movie::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'head_pic' => $faker->text,
-        'link' => $faker->text,
+        'cover_image' => $faker->text,
+        'vdo' => $faker->text,
         'storyline' => $faker->text,
         'budget' => $faker->numberBetween($min = 1, $max = 1000),
         'opening' => $faker->numberBetween($min = 1, $max = 1000),

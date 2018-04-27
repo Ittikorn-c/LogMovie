@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/movie', 'MoviesController');
+
+Route::get('/mod',"ModController@index");
+Route::get('/movies/create','MoviesController@create');
+Route::post('/movies/store','MoviesController@store');
