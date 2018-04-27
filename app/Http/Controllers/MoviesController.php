@@ -31,7 +31,11 @@ class MoviesController extends Controller
           'Adventure' => 'Adventure',
           'Sci-Fi' => 'Sci-Fi'
       ];
-        return view('movies.create', ["genres"=>$genres]);
+      $color = [
+        'color' => true,
+        'black-white' => false
+      ];
+        return view('movies.create', ["genres"=>$genres, "color"=>$color]);
     }
 
     /**
@@ -60,7 +64,6 @@ class MoviesController extends Controller
         ],[]);
 
         $movie = new Movie;
-        $genres = new Genre;
         $movie->name = $request->input('name');
         $movie->vdo = $request->input('vdo');
         $movie->storyline = $request->input('storyline');
@@ -95,16 +98,18 @@ class MoviesController extends Controller
               $image->save();
             }
           }
-          $genres->movie_id = $movie->id;
-          $genres->genres = $request->input('genres');
-          $genres->save();
+          if ($genres=$request->input("genres")) {
+            foreach ($genres as $gen) {
+              $genres = new Genre;
+              $genres->movie_id = $movie->id;
+              $genres->genres = $gen;
+              $genres->save();
+            }
+          }
           if($upload && $cover_upload){
             return redirect()
             ->back()
             ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
-          }
-          else {
-            return redirect()->withInput();
           }
       }
 
