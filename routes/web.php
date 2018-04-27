@@ -18,3 +18,10 @@ Route::get('/', function () {
 Route::get('/mod',"ModController@index");
 Route::get('/movies/create','MoviesController@create');
 Route::post('/movies/store','MoviesController@store');
+Route::get('/movies/{movie}/edit', 'MoviesController@edit')->where('movie', '[0-9]+');
+Route::put('/movies/{movie}', 'MoviesController@update')->where('movie', '[0-9]+');
+
+Route::get('/news/create','NewsController@create');
+Route::post('/news/store','NewsController@store');
+Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
+Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');

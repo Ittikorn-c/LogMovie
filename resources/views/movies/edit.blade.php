@@ -33,7 +33,8 @@
       <p>{{ Session::get('message') }}</p>
     </div>
   @endif
-  <form runat="server" class="form-horizontal" novalidate enctype="multipart/form-data" method="post" action="/movies/store">
+  <form runat="server" class="form-horizontal" novalidate enctype="multipart/form-data" method="post" action="/movies/{{ $movie->id }}">
+    @method('PUT')
     {{ csrf_field() }}
     <div class="form-group">
       <div id="cover_image_field" class="form-inline">
@@ -45,56 +46,56 @@
       </div>
       <div id="name_field" class="form-inline">
         <label>Name : </label>
-        <input value="{{ old('name') }}" type="text" name="name" required class="form-control"/>
+        <input value="{{ old('name') ?? $movie->name }}" type="text" name="name" required class="form-control"/>
         @if ($errors->has('name'))
         <div class="text-danger">{{ $errors->first('name') }}</div>
         @endif
       </div>
       <div id="vdo_field" class="form-inline">
         <label>Link trailer : </label>
-        <input value="{{ old('vdo') }}" type="text" name="vdo" class="form-control"/>
+        <input value="{{ old('vdo')  ?? $movie->vdo }}" type="text" name="vdo" class="form-control"/>
         @if ($errors->has('vdo'))
         <div class="text-danger">{{ $errors->first('vdo') }}</div>
         @endif
       </div>
       <div id="storyline_field" class="form-inline">
         <label>Storyline : </label>
-        <input type="text" name="storyline" value="{{ old('storyline') }}" class="form-control"/>
+        <input type="text" name="storyline" value="{{ old('storyline')  ?? $movie->storyline }}" class="form-control"/>
         @if ($errors->has('storyline'))
         <div class="text-danger">{{ $errors->first('storyline') }}</div>
         @endif
       </div>
       <div id="budget_field" class="form-inline">
         <label>Budget : </label>
-        <input type="number" name="budget" value="{{ old('budget') }}" class="form-control"/>
+        <input type="number" name="budget" value="{{ old('budget') ?? $movie->budget }}" class="form-control"/>
         @if ($errors->has('budget'))
         <div class="text-danger">{{ $errors->first('budget') }}</div>
         @endif
       </div>
       <div id="opening_field" class="form-inline">
         <label>Opening : </label>
-        <input type="number" name="opening" value="{{ old('opening') }}" class="form-control"/>
+        <input type="number" name="opening" value="{{ old('opening') ?? $movie->opening }}" class="form-control"/>
         @if ($errors->has('opening'))
         <div class="text-danger">{{ $errors->first('opening') }}</div>
         @endif
       </div>
       <div id="gross_field" class="form-inline">
         <label>Gross : </label>
-        <input type="number" name="gross" class="form-control" value="{{ old('gross') }}"/>
+        <input type="number" name="gross" class="form-control" value="{{ old('gross') ?? $movie->gross }}"/>
         @if ($errors->has('gross'))
         <div class="text-danger">{{ $errors->first('gross') }}</div>
         @endif
       </div>
       <div id="cumulative_field" class="form-inline">
         <label>Cumulative : </label>
-        <input type="text" name="cumulative" class="form-control" value="{{ old('cumulative') }}"/>
+        <input type="text" name="cumulative" class="form-control" value="{{ old('cumulative') ?? $movie->cumulative }}"/>
         @if ($errors->has('cumulative'))
         <div class="text-danger">{{ $errors->first('cumulative') }}</div>
         @endif
       </div>
       <div id="runtime_field" class="form-inline">
         <label>Runtime : </label>
-        <input type="number" name="runtime" class="form-control" value="{{ old('runtime') }}"/>
+        <input type="number" name="runtime" class="form-control" value="{{ old('runtime') ?? $movie->runtime }}"/>
         @if ($errors->has('runtime'))
         <div class="text-danger">{{ $errors->first('runtime') }}</div>
         @endif
@@ -103,7 +104,7 @@
         <label>Color : </label>
         <select class="form-control" name="color">
           @foreach ($color as $key => $value)
-            @if(old('color') == $key)
+            @if((old('color') ?? $movie->color) == $key)
               <option value="{{ $value }}" selected>{{ $key }}</option>
             @else
               <option value="{{ $value }}">{{ $key }}</option>
@@ -113,7 +114,7 @@
       </div>
       <div id="aspect_ratio_field" class="form-inline">
         <label>Aspect ratio : </label>
-        <input type="text" name="aspect_ratio" class="form-control" value="{{ old('aspect_ratio') }}"/>
+        <input type="text" name="aspect_ratio" class="form-control" value="{{ old('aspect_ratio') ?? $movie->aspect_ratio }}"/>
         @if ($errors->has('aspect_ratio'))
         <div class="text-danger">{{ $errors->first('aspect_ratio') }}</div>
         @endif
@@ -121,7 +122,7 @@
       <div id="genres_select" class="form-inline">
         <label>Genres : </label>
           @foreach($genres as $key => $value)
-            @if(old('genres') == $key)
+            @if((old('genres') ?? $movie->genres) == $key)
               <input type="checkbox" name="genres[]" value="{{ $value }}" checked/>{{ $value }}<br>
             @else
               <input type="checkbox" name="genres[]" value="{{ $value }}"/>{{ $value }}<br>
