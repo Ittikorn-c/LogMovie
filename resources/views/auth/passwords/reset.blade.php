@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
-            <div class="lm-card">
+            <div class="lm-card-form lm-card-single">
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}">
                         @csrf
@@ -37,7 +37,7 @@
                             <label for="password">Password</label>
                             <input id='password' name="password" type="password"
                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                   value="{{ old('password') }}" required autofocus>
+                                   required autofocus>
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -50,7 +50,7 @@
                             <label for="password-confirm">Password Confirmation</label>
                             <input id='password-confirm' name="password_confirmation" type="password"
                                    class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
-                                    required autofocus>
+                                   required autofocus>
                             @if ($errors->has('password_confirmation'))
                                 <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>

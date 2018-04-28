@@ -14,7 +14,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
-            <div class="lm-card">
+            <div class="lm-card-form lm-card-single">
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf

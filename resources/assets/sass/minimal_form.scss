@@ -1,21 +1,25 @@
 @import "variables";
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
-.lm-card {
+.lm-card-form {
   position: relative;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
-  border-radius: 3px;
   background-color: white;
-  width:392px;
   padding: 16px 12px;
   display: flex;
+}
+
+.lm-card-single {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+  width: 392px;
+  border-radius: 3px;
   margin: 100px auto;
 }
 
-.lm-card .heading {
+.lm-card-single .heading {
   padding: 48px 0 24px;
 }
 
-.lm-card .lm-logo {
+.lm-card-single .lm-logo {
   position: absolute;
   top: -50px;
   left: 0;
@@ -30,18 +34,80 @@
   border-radius: 50%;
 }
 
-.lm-card label {
+.lm-card-form label {
   font-weight: 600;
   font-size: 12px;
   color: $nice-black;
 }
 
-.lm-card .checkbox label {
+.lm-card-form .checkbox label {
   display: inline;
 }
 
-.lm-card .heading .link-container {
+.lm-card-form .link-container {
   font-size: 12px;
   color: $nice-black;
   display: inline-block;
+}
+
+.lm-register {
+  margin: 64px auto;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  max-width: 394+394px;
+}
+
+.lm-register .right-side {
+  max-width: 394px;
+  background-color: white;
+  padding: 16px 12px;
+  display: flex;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+
+.lm-register .left-side {
+  max-width: 394px;
+  background: linear-gradient(to bottom, #355c7d, #6c5b7b, #c06c84);
+  padding: 16px 12px;
+  display: flex;
+  border-radius: 3px 0 0 3px;
+  color: white;
+}
+
+.lm-register .left-side {
+  position: relative;
+  .pitch, .logo {
+    font-family: 'Raleway', "Open Sans", sans-serif;
+    text-align: center;
+  }
+
+  .logo {
+    margin: 24px auto 12px;
+  }
+
+  .pitch {
+    margin: 42px 0;
+  }
+
+  .text-container {
+    margin: 35px auto 15px;
+    color: white;
+    font-weight: 300;
+    font-size: 1em;
+    line-height: 24px;
+    text-align: left;
+    padding: 0 45px 0 30px;
+  }
+
+  .image-container {
+    position: absolute;
+    background: no-repeat;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.show-password {
+  opacity: .4;
+  cursor: pointer;
 }
