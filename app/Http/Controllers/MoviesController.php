@@ -107,9 +107,10 @@ class MoviesController extends Controller
             }
           }
           if($upload && $cover_upload){
-            return redirect()
-            ->back()
-            ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
+            return redirect("/movie/".$movie->id);
+            // return redirect()
+            // ->back()
+            // ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
           }
       }
 
