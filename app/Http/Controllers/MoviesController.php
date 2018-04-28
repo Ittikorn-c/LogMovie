@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Movie;
 use App\ImageMovie;
 use App\Genre;
+use App\UserReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MoviesController extends Controller
 {
@@ -16,14 +18,14 @@ class MoviesController extends Controller
      */
     public function index()
     {
-
+        return view('movies.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function create()
     {
       $genres = [
@@ -42,6 +44,7 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $validatedData = $request->validate([
           'name' => 'required',
           'images' => 'required',
@@ -57,8 +60,7 @@ class MoviesController extends Controller
           'color' => 'required',
           'aspect_ratio' => 'required',
           'genres' => 'required',
-        ],[]);
-
+        ]);
         $movie = new Movie;
         $genres = new Genre;
         $movie->name = $request->input('name');
@@ -116,7 +118,8 @@ class MoviesController extends Controller
      */
     public function show(Movie $movie)
     {
-        //
+        $review = UserReview::findOrFail(1);
+        return view('movies.show', ["movie"=>$movie, "review"=>$review]);
     }
 
     /**
@@ -151,5 +154,10 @@ class MoviesController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    public function pic($path){
+        $url = Storage::url($path);
+        return $url;
     }
 }

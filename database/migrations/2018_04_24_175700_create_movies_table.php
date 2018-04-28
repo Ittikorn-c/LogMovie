@@ -18,7 +18,7 @@ class CreateMoviesTable extends Migration
             $table->string('name');
             $table->string('vdo');
             $table->string('cover_image');
-            $table->string('storyline');
+            $table->text('storyline');
             $table->string('budget');
             $table->string('opening');
             $table->string('gross');

@@ -17,7 +17,9 @@ class CreateUserReviewsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('movie_id');
-            $table->String('review');
+            $table->unsignedInteger('rate');
+            $table->text('header');
+            $table->text('review');
             $table->timestamps();
 
             $table->foreign('user_id')
