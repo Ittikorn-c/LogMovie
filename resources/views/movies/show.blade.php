@@ -6,7 +6,7 @@
             
             width: 100%;
             height: 100vh;
-            background-image: url(../{{ $movie->head_pic }});
+            background-image: url(555/app/public/cover_images_movies/{{ $movie->cover_image }});
             background-size: cover;
             background-position: center;
         }
@@ -50,7 +50,8 @@
         position: relative;
         height: 50px;
         line-height: 50px;
-        font-size: 50px;
+        font-size: 40px;
+        border: 1px solid black;
         }
 
         .rating label {
@@ -136,7 +137,7 @@
         }
 
         .sidebar-box{
-            max-height: 300px;
+            max-height: 200px;
             position: relative;
             overflow: hidden;
         }
@@ -148,7 +149,7 @@
             width: 100%;
             text-align: center;
             margin: 0;
-            padding: 30px 0;
+            padding: 10px 0;
             
             background-image: linear-gradient(to bottom, transparent, lightgray);
         }
@@ -261,13 +262,16 @@
             <span class="icon">★</span>
         </label>
         </form>
-
+        <form action="/userreviews" method="post">
+        <input type="text" id="rate" name="rate" value="">
+        {{ csrf_field() }}
         <h3>YOUR REVIEW</h3>
-        <input type="text" class="reviewinput" placeholder="Write a headline for your review here" width="100%">
+        <input type="text" name="header" class="reviewinput" placeholder="Write a headline for your review here" width="100%">
         <br>
-        <textarea class="reviewinput" cols="30" rows="10" placeholder="Write your review here" width="100%"></textarea>
+        <textarea name="review" class="reviewinput" cols="30" rows="10" placeholder="Write your review here" width="100%"></textarea>
         <br>
         <button type="submit">Submit</button>
+        </form>
     </div>
 </div>
 <div class="jumbotron jumbotron-fluid">
@@ -276,7 +280,7 @@
   </div>
 </div>
 <div class="container">
-<iframe width="420" height="345" src={{$movie->link}}></iframe>
+<iframe width="420" height="345" src={{$movie->vdo}}></iframe>
 <hr>
 <div class="row">
     <h1>Video</h1>
@@ -313,7 +317,8 @@
 <hr>
 <div class="row">
     <h1>User Reciews</h1>
-    
+    <p>{{ $review->header }}</p>
+    <p>{{ $review->review }}</p>
     <button id="reviewBtn">Review this title</button>
 </div>
 </div>
@@ -347,6 +352,7 @@ window.onclick = function(event) {
 
 $(':radio').change(function() {
   console.log('New star rating: ' + this.value);
+  document.getElementById("rate").value = this.value;
 });
 
 var $el, $ps, $up, totalHeight;
@@ -359,7 +365,7 @@ $(".sidebar-box .button").click(function() {
     $ps = $up.find("p:not('.read-more')");
     
     $ps.each(function() {
-        totalHeight += $(this).outerHeight();
+        totalHeight += $(this).outerHeight()+100;
     });
 $up
     .css({
