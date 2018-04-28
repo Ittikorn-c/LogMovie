@@ -17,14 +17,8 @@ class CreateMoviesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('storyline');
-            $table->string('budget');
-            $table->string('opening');
-            $table->string('gross');
-            $table->string('cumulative');
-            $table->unsignedInteger('runtime');
-            $table->boolean('color');
-            $table->string('aspect_ratio');
-            $table->timestamps();  
+            $table->string('Details');
+            $table->timestamps();
         });
     }
 
