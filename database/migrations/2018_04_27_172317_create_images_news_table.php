@@ -13,17 +13,17 @@ class CreateImagesNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('images_news', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('news_id');
-            $table->string('image');
-            $table->timestamps();
+      Schema::create('images_news', function (Blueprint $table) {
+          $table->increments('id');
+          $table->unsignedInteger('news_id');
+          $table->string('image');
+          $table->timestamps();
 
-            $table->foreign('news_id')
-            ->references('id')
-            ->on('news')
-            ->onDelete('cascade');
-        });
+          $table->foreign('news_id')
+          ->references('id')
+          ->on('news')
+          ->onDelete('cascade');
+      });
     }
 
     /**

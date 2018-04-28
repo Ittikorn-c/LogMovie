@@ -24,7 +24,7 @@ class ModController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
