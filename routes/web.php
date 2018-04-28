@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('movies.index');
 });
+
+Route::resource('/movie', 'MoviesController');
 
 Route::get('/mod',"ModController@index");
 Route::get('/movies/create','MoviesController@create');
