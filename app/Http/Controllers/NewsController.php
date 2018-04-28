@@ -59,7 +59,7 @@ class NewsController extends Controller
             $n++;
             $image = new ImagesNews;
             $image->news_id = $news->id;
-            $image->image = public_path().'/images_news' . '/' . $name;
+            $image->image = public_path().'images_news' . '/' . $name;
             $image->save();
           }
         }
@@ -115,7 +115,7 @@ class NewsController extends Controller
       //       $n++;
       //       $image = new ImagesNews;
       //       $image->news_id = $news->id;
-      //       $image->image = public_path().'images_news' . '/' . $name;
+      //       $image->image = 'images_news' . '/' . $name;
             // $image->save();
         //   }
         // }

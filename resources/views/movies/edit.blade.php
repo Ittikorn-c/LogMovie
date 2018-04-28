@@ -1,6 +1,9 @@
-@extends("mod/master")
+@extends("layouts/master")
 
-@push("style")
+@section("header")
+
+@endsection
+
 <style media="screen">
       img {
         max-width: 200px;
@@ -9,15 +12,32 @@
       .custom-file-label {
         overflow: hidden;
       }
+      .body {
+        margin-top: 12%;
+        margin-bottom: 5%;
+        padding: 20px 70px;
+        background-color: #e1e2ec;
+        border-width: 20px;
+        border-radius: 20px;
+      }
+      .h1 {
+        font-size: 60px;
+        text-align: center;
+        margin: 40px ;
+      }
+      .form-group{
+        font-size: 17px;
+      }
+      #thumbnail {
+        font-size: 17px;
+        min-height: 150px;
+      }
 </style>
-@endpush
-
-@section("title-page")
-<h1>Create Movie Page</h1>
-@endsection
 
 @section("content")
 <div class="container">
+  <div class="body">
+  <h1>Create Movie Page</h1>
   @if (count($errors) > 0)
     <div class="alert alert-danger">
     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -37,119 +57,173 @@
     @method('PUT')
     {{ csrf_field() }}
     <div class="form-group">
-      <div id="cover_image_field" class="form-inline">
-        <label>Cover image : </label>
-        <div class="custom-file">
-          <input id="file_cover_upload" type="file" class="custom-file-input" name="cover_image" placeholder="address">
-          <label class="custom-file-label" for="customFile">Choose file</label>
+      <div class="form-group row">
+        <label for="name_field" class="col-sm-3 col-form-label">Name : </label>
+        <div class="col-sm-5">
+          <input id="name_field" value="{{ old('name') ?? $movie->name }}" type="text" name="name" required class="form-control"/>
         </div>
       </div>
-      <div id="name_field" class="form-inline">
-        <label>Name : </label>
-        <input value="{{ old('name') ?? $movie->name }}" type="text" name="name" required class="form-control"/>
-        @if ($errors->has('name'))
-        <div class="text-danger">{{ $errors->first('name') }}</div>
-        @endif
+      @if ($errors->has('name'))
+      <div class="text-danger col-sm-12">{{ $errors->first('name') }}</div>
+      @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="file_cover_upload">Cover image : </label>
+          <div class="custom-file col-sm-6">
+            <input id="file_cove_upload" type="file" class="form-control-file" name="cover_image" placeholder="address">
+          </div>
       </div>
-      <div id="vdo_field" class="form-inline">
-        <label>Link trailer : </label>
-        <input value="{{ old('vdo')  ?? $movie->vdo }}" type="text" name="vdo" class="form-control"/>
-        @if ($errors->has('vdo'))
-        <div class="text-danger">{{ $errors->first('vdo') }}</div>
-        @endif
+      @if ($errors->has('cover_image'))
+      <div class="text-danger col-sm-12">{{ $errors->first('cover_image') }}</div>
+      @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="vdo_field">Link trailer : </label>
+          <div class="custom-file col-sm-7">
+            <input id="vdo_field" value="{{ old('vdo') ?? $movie->vdo }}" type="text" name="vdo" class="form-control"/>
+          </div>
       </div>
-      <div id="storyline_field" class="form-inline">
-        <label>Storyline : </label>
-        <input type="text" name="storyline" value="{{ old('storyline')  ?? $movie->storyline }}" class="form-control"/>
-        @if ($errors->has('storyline'))
-        <div class="text-danger">{{ $errors->first('storyline') }}</div>
-        @endif
+      @if ($errors->has('vdo'))
+      <div class="text-danger col-sm-12">{{ $errors->first('vdo') }}</div>
+      @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="storyline_field">Storyline : </label>
+          <div class="custom-file col-sm-9">
+            <textarea rows="7" id="storyline_field" type="text" name="storyline" class="form-control">{{ old('storyline') ?? $movie->storyline }}</textarea>
+          </div>
       </div>
-      <div id="budget_field" class="form-inline">
-        <label>Budget : </label>
-        <input type="number" name="budget" value="{{ old('budget') ?? $movie->budget }}" class="form-control"/>
-        @if ($errors->has('budget'))
-        <div class="text-danger">{{ $errors->first('budget') }}</div>
-        @endif
+      @if ($errors->has('storyline'))
+      <div class="text-danger col-sm-12">{{ $errors->first('storyline') }}</div>
+      @endif
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-group row"></div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="budget_field">Budget</label>
+          <input id="budget_field" type="number" name="budget" value="{{ old('budget') ?? $movie->budget }}" class="form-control"/>
+        </div>
+        <div class="form-group col-md-2"></div>
+        <div class="form-group col-md-4">
+          <label for="opening_field">Opening</label>
+          <input id="opening_field" type="number" name="opening" value="{{ old('opening') ?? $movie->opening }}" class="form-control"/>
+        </div>
+        <div class="form-group col-md-2"></div>
       </div>
-      <div id="opening_field" class="form-inline">
-        <label>Opening : </label>
-        <input type="number" name="opening" value="{{ old('opening') ?? $movie->opening }}" class="form-control"/>
-        @if ($errors->has('opening'))
-        <div class="text-danger">{{ $errors->first('opening') }}</div>
-        @endif
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          @if ($errors->has('budget'))
+          <div class="text-danger">{{ $errors->first('budget') }}</div>
+          @endif
+        </div>
+        <div class="form-group col-md-6">
+          @if ($errors->has('opening'))
+          <div class="text-danger">{{ $errors->first('opening') }}</div>
+          @endif
+        </div>
       </div>
-      <div id="gross_field" class="form-inline">
-        <label>Gross : </label>
-        <input type="number" name="gross" class="form-control" value="{{ old('gross') ?? $movie->gross }}"/>
-        @if ($errors->has('gross'))
-        <div class="text-danger">{{ $errors->first('gross') }}</div>
-        @endif
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="gross_field">Gross</label>
+          <input id="gross_field" type="number" name="gross" class="form-control" value="{{ old('gross') ?? $movie->gross }}"/>
+        </div>
+        <div class="form-group col-md-2"></div>
+        <div class="form-group col-md-4">
+          <label for="cumulative_field">Cumulative</label>
+          <input id="cumulative_field" type="number" name="cumulative" class="form-control" value="{{ old('cumulative') ?? $movie->cumulative }}"/>
+        </div>
+        <div class="form-group col-md-2"></div>
       </div>
-      <div id="cumulative_field" class="form-inline">
-        <label>Cumulative : </label>
-        <input type="text" name="cumulative" class="form-control" value="{{ old('cumulative') ?? $movie->cumulative }}"/>
-        @if ($errors->has('cumulative'))
-        <div class="text-danger">{{ $errors->first('cumulative') }}</div>
-        @endif
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          @if ($errors->has('gross'))
+          <div class="text-danger">{{ $errors->first('gross') }}</div>
+          @endif
+        </div>
+        <div class="form-group col-md-6">
+          @if ($errors->has('cumulative'))
+          <div class="text-danger">{{ $errors->first('cumulative') }}</div>
+          @endif
+        </div>
       </div>
-      <div id="runtime_field" class="form-inline">
-        <label>Runtime : </label>
-        <input type="number" name="runtime" class="form-control" value="{{ old('runtime') ?? $movie->runtime }}"/>
-        @if ($errors->has('runtime'))
-        <div class="text-danger">{{ $errors->first('runtime') }}</div>
-        @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="runtime_field">Runtime : </label>
+          <div class="custom-file col-sm-4">
+            <input id="runtime_field" type="number" name="runtime" class="form-control" value="{{ old('runtime') ?? $movie->runtime }}"/>
+          </div>
       </div>
-      <div id="color_field" class="form-inline">
-        <label>Color : </label>
-        <select class="form-control" name="color">
-          @foreach ($color as $key => $value)
-            @if((old('color') ?? $movie->color) == $key)
-              <option value="{{ $value }}" selected>{{ $key }}</option>
-            @else
-              <option value="{{ $value }}">{{ $key }}</option>
-            @endif
-          @endforeach;
-        </select>
+      @if ($errors->has('runtime'))
+      <div class="text-danger col-sm-12">{{ $errors->first('runtime') }}</div>
+      @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="color_field">Color : </label>
+          <div class="custom-file col-sm-4">
+            <select id="color_field" class="form-control" name="color">
+              @foreach ($color as $key => $value)
+                @if((old('color') ?? $movie->color) == $key)
+                  <option value="{{ $value }}" selected>{{ $key }}</option>
+                @else
+                  <option value="{{ $value }}">{{ $key }}</option>
+                @endif
+              @endforeach;
+            </select>
+          </div>
       </div>
-      <div id="aspect_ratio_field" class="form-inline">
-        <label>Aspect ratio : </label>
-        <input type="text" name="aspect_ratio" class="form-control" value="{{ old('aspect_ratio') ?? $movie->aspect_ratio }}"/>
-        @if ($errors->has('aspect_ratio'))
-        <div class="text-danger">{{ $errors->first('aspect_ratio') }}</div>
-        @endif
+      @if ($errors->has('color'))
+      <div class="text-danger col-sm-12">{{ $errors->first('color') }}</div>
+      @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="aspect_ratio_field">Aspect ratio : </label>
+          <div class="custom-file col-sm-4">
+            <input id="aspect_ratio_field" type="text" name="aspect_ratio" class="form-control" value="{{ old('aspect_ratio') ?? $movie->aspect_ratio }}"/>
+          </div>
       </div>
-      <div id="genres_select" class="form-inline">
-        <label>Genres : </label>
-          @foreach($genres as $key => $value)
-            @if((old('genres') ?? $movie->genres) == $key)
-              <input type="checkbox" name="genres[]" value="{{ $value }}" checked/>{{ $value }}<br>
-            @else
-              <input type="checkbox" name="genres[]" value="{{ $value }}"/>{{ $value }}<br>
-            @endif
-          @endforeach
+      @if ($errors->has('aspect_ratio'))
+      <div class="text-danger col-sm-12">{{ $errors->first('aspect_ratio') }}</div>
+      @endif
+      <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="genres_select">Genres : </label>
+          <div class="custom-file col-sm-7">
+            <div id="genres_select" class="btn-group" role="group" aria-label="Basic example">
+              @foreach($genres as $key => $value)
+                <label class="btn btn-outline-dark">
+                @if((old('genres') ?? $movie->genres) == $key)
+                  <input type="checkbox" name="genres[]" value="{{ $value }}" checked/>{{ $value }}
+                @else
+                  <input type="checkbox" name="genres[]" value="{{ $value }}" />{{ $value }}
+                @endif
+                </label>
+              @endforeach
+            </div>
+          </div>
       </div>
-      <div id="images_select" class="form-inline">
-        <label>Select images : </label>
-        <input id="file_upload" type="file" class="form-control" name="images[]" placeholder="address" multiple>
-        @if ($errors->has('images'))
-        <div class="text-danger">{{ $errors->first('images') }}</div>
-        @endif
+      @if ($errors->has('genres'))
+      <div class="text-danger col-sm-12">{{ $errors->first('genres') }}</div>
+      @endif
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="file_upload">Select images</label>
+          <input id="file_upload" type="file" class="form-control-file" name="images[]" placeholder="address" multiple>
+        </div>
+        <div class="form-group col-md-8">
+          <label for="thumbnail">Preview : </label>
+          <div id="thumbnail"></div>
+        </div>
       </div>
+      @if ($errors->has('images'))
+      <div class="text-danger col-sm-12">{{ $errors->first('images') }}</div>
+      @endif
     </div>
-    <label>Preview : </label>
-    <div id="thumbnail"></div>
-    <div class="form-group">
-      <input type="submit" value="Save Image" class="btn btn-info">
+      <input type="submit" value="Save Image" class="btn btn-secondary btn-lg active">
     </div>
   </form>
 </div>
+</div>
 <script type="text/javascript" >
   $(function () {
-    $("#upload").on("click",function(e){
-      $("#file_upload").show().click().hide();
-      e.preventDefault();
-    });
     $("#file_upload").on("change",function(e){
       var files = this.files
       showThumbnail(files)
@@ -181,17 +255,6 @@
         }
       }
     }
-  });
-</script>
-<script type="text/javascript">
-  $("input[type=file]").change(function () {
-    var fieldVal = $(this).val();
-    fieldVal = fieldVal.replace("C:\\fakepath\\", "");
-    if (fieldVal != undefined || fieldVal != "") {
-      $(this).next(".custom-file-label").attr('data-content', fieldVal);
-      $(this).next(".custom-file-label").text(fieldVal);
-    }
-
   });
 </script>
 @endsection

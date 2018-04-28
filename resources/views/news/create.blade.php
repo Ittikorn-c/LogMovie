@@ -1,20 +1,20 @@
-@extends("mod/master")
+@extends("layouts/master")
 
-@push("style")
 <style media="screen">
   img {
     max-width: 200px;
     margin: 10px;
   }
 </style>
-@endpush
 
-@section("title-page")
-<h1>Create New Page</h1>
+
+@section("header")
+
 @endsection
 
 @section("content")
 <div class="container">
+  <h1>Create New Page</h1>
   @if (count($errors) > 0)
     <div class="alert alert-danger">
     <strong>Whoops!</strong> There were some problems with your input.<br><br>

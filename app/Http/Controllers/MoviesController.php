@@ -18,9 +18,9 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $movie = Movie::all();
-        
+
         return view('movies.index', ["movie" => $movie]);
     }
 
@@ -28,7 +28,7 @@ class MoviesController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function create()
     {
       $genres = [
@@ -38,7 +38,7 @@ class MoviesController extends Controller
       ];
       $color = [
         'color' => true,
-        'black-white' => false
+        'black-white' => false,
       ];
         return view('movies.create', ["genres"=>$genres, "color"=>$color]);
     }
@@ -77,7 +77,7 @@ class MoviesController extends Controller
         $movie->gross = $request->input('gross');
         $movie->cumulative = $request->input('cumulative');
         $movie->runtime = $request->input('runtime');
-        $movie->color = true;
+        $movie->color = $request->input('color');
         $movie->aspect_ratio = $request->input('aspect_ratio');
         if($cover=$request->file('cover_image')){
             $cover_ext = $cover->getClientOriginalExtension();
@@ -85,7 +85,7 @@ class MoviesController extends Controller
             $cover_upload = $cover->move(
               public_path().'/cover_images_movies', $cover_name);
             if ($cover_upload) {
-              $movie->cover_image = public_path().'/cover_images_movies' . '/' . $cover_name;
+              $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
             }
         }
         $movie->save();
@@ -99,7 +99,7 @@ class MoviesController extends Controller
               $n++;
               $image = new ImageMovie;
               $image->movie_id = $movie->id;
-              $image->image = public_path().'/images_movies' . '/' . $name;
+              $image->image = 'images_movies' . '/' . $name;
               $image->save();
             }
           }
@@ -112,7 +112,7 @@ class MoviesController extends Controller
             }
           }
           if($upload && $cover_upload){
-            return redirect("/movie/".$movie->id);
+            return redirect("/movies/".$movie->id);
             // return redirect()
             // ->back()
             // ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
@@ -126,7 +126,7 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
-    {   
+    {
         $max = UserReview::max('rate');
         $review = UserReview::where('rate', '=', $max)->get()[0];
         $like = LikeReview::where('movie_id', '=', $movie->id)->count();
@@ -195,7 +195,7 @@ class MoviesController extends Controller
           $cover_upload = $cover->move(
             public_path().'/cover_images_movies', $cover_name);
           if ($cover_upload) {
-            $movie->cover_image = public_path().'/cover_images_movies' . '/' . $cover_name;
+            $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
           }
       }
       $movie->save();
@@ -209,7 +209,7 @@ class MoviesController extends Controller
             $n++;
             $image = new ImageMovie;
             $image->movie_id = $movie->id;
-            $image->image = public_path().'/images_movies' . '/' . $name;
+            $image->image = 'images_movies' . '/' . $name;
             $image->save();
           }
         }
@@ -222,9 +222,10 @@ class MoviesController extends Controller
           }
         }
         if($upload && $cover_upload){
-          return redirect()
-          ->back()
-          ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
+          return redirect("/movies/".$movie->id);
+          // return redirect()
+          // ->back()
+          // ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
         }
     }
 
