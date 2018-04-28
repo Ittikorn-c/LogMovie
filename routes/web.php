@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/movies', 'MoviesController');
+Route::resource('/likereviews', 'LikeReviewsController');
 Route::resource('/userreviews', 'UserReviewsController');
 Route::get('/mod',"ModController@index");
 Route::get('/movies/create','MoviesController@create');

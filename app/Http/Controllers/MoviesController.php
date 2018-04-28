@@ -6,6 +6,7 @@ use App\Movie;
 use App\ImageMovie;
 use App\Genre;
 use App\UserReview;
+use App\LikeReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,8 +18,10 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('movies.index');
+    {   
+        $movie = Movie::all();
+        
+        return view('movies.index', ["movie" => $movie]);
     }
 
     /**
@@ -117,9 +120,11 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
-    {
-        $review = UserReview::findOrFail(1);
-        return view('movies.show', ["movie"=>$movie, "review"=>$review]);
+    {   
+        $max = UserReview::max('rate');
+        $review = UserReview::where('rate', '=', $max)->get()[0];
+        $like = LikeReview::where('movie_id', '=', $movie->id)->count();
+        return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like]);
     }
 
     /**

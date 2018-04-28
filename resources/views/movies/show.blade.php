@@ -6,7 +6,7 @@
             
             width: 100%;
             height: 100vh;
-            background-image: url(555/app/public/cover_images_movies/{{ $movie->cover_image }});
+            background-image: url(../{{ $movie->cover_image }});
             background-size: cover;
             background-position: center;
         }
@@ -155,7 +155,7 @@
         }
     </style>
     <section class="sec1">
-        <div class="text-head">
+        <div class="text-head w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
             {{ $movie->name }}
             
         </div>
@@ -319,6 +319,11 @@
     <h1>User Reciews</h1>
     <p>{{ $review->header }}</p>
     <p>{{ $review->review }}</p>
+    <p>{{ $like }}</p>
+    <form action="/likereviews" method="post">
+    {{ csrf_field() }}
+    <button>Like</button>
+    </form>
     <button id="reviewBtn">Review this title</button>
 </div>
 </div>
