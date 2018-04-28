@@ -54,12 +54,12 @@ class NewsController extends Controller
         foreach($files as $file){
           $ext = $file->getClientOriginalExtension();
           $name=time().$n.'.'.$ext;
-          $upload = $file->storeAs(
-            '/public/images_news', $name);
+          $upload = $file->move(
+            public_path().'/images_news', $name);
             $n++;
             $image = new ImagesNews;
             $image->news_id = $news->id;
-            $image->image = '/public/images_news' . '/' . $name;
+            $image->image = public_path().'/images_news' . '/' . $name;
             $image->save();
           }
         }
@@ -110,12 +110,12 @@ class NewsController extends Controller
       //   foreach($files as $file){
       //     $ext = $file->getClientOriginalExtension();
       //     $name=time().$n.'.'.$ext;
-      //     $upload = $file->storeAs(
-      //       '/public/images_news', $name);
+      //     $upload = $file->move(
+      //       public_path().'images_news', $name);
       //       $n++;
       //       $image = new ImagesNews;
       //       $image->news_id = $news->id;
-      //       $image->image = '/public/images_news' . '/' . $name;
+      //       $image->image = public_path().'images_news' . '/' . $name;
             // $image->save();
         //   }
         // }
