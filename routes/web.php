@@ -14,7 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', 'UsersController@index');
+Route::get('/users/{user}', 'UsersController@show')->where('user', '[0-9]+');
+Route::get('/users/{user}/review', 'UsersController@review')->where('user','[0-9]+');
+Route::get('/users/{user}/edit', 'UsersController@edit')->where('user','[0-9]+');
 
-Route::get('/mod',"ModController@index");
-Route::get('/movies/create','MoviesController@create');
-Route::post('/movies/store','MoviesController@store');
+Route::get('/admin/movies', 'MoviesController@index');
+Route::get('/admin/movies/{movie}', 'MoviesController@show');
+Route::get('/admin/movies/{movie}/edit', 'MoviesController@edit');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
