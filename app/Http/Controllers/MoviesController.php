@@ -80,7 +80,7 @@ class MoviesController extends Controller
             $cover_upload = $cover->move(
               public_path().'/cover_images_movies', $cover_name);
             if ($cover_upload) {
-              $movie->cover_image = public_path().'/cover_images_movies' . '/' . $cover_name;
+              $movie->cover_image = '/cover_images_movies' . '/' . $cover_name;
             }
         }
         $movie->save();
@@ -94,7 +94,7 @@ class MoviesController extends Controller
               $n++;
               $image = new ImageMovie;
               $image->movie_id = $movie->id;
-              $image->image = public_path().'/images_movies' . '/' . $name;
+              $image->image = '/images_movies' . '/' . $name;
               $image->save();
             }
           }
@@ -186,7 +186,7 @@ class MoviesController extends Controller
           $cover_upload = $cover->move(
             public_path().'/cover_images_movies', $cover_name);
           if ($cover_upload) {
-            $movie->cover_image = public_path().'/cover_images_movies' . '/' . $cover_name;
+            $movie->cover_image = '/cover_images_movies' . '/' . $cover_name;
           }
       }
       $movie->save();
@@ -200,7 +200,7 @@ class MoviesController extends Controller
             $n++;
             $image = new ImageMovie;
             $image->movie_id = $movie->id;
-            $image->image = public_path().'/images_movies' . '/' . $name;
+            $image->image = '/images_movies' . '/' . $name;
             $image->save();
           }
         }

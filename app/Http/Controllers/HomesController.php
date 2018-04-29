@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Home;
 use App\Movie;
 use App\News;
+use App\ImagesNews;
+use App\ImageMovie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomesController extends Controller
 {
@@ -16,8 +19,9 @@ class HomesController extends Controller
      */
     public function index()
     {
-        $movies = Movie::orderBy('created_at', 'desc')->take(5)->get();
-        $news = News::orderBy('created_at', 'desc')->take(5)->get();
+        $movies = Movie::orderBy('created_at', 'desc')->take(6)->get();
+        $news = News::orderBy('created_at', 'desc')->take(4)->get();
+        // $movies_image = DB::table('movies')->join('image_movies', 'movies.id', '=', 'image_movies.movie_id')->select('movies.*', 'image_movies.image')->orderBy('created_at', 'desc')->take(5)->get();
         return view('home.index', ['movies' => $movies, 'news' => $news]);
     }
 

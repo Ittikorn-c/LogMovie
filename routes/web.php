@@ -27,3 +27,5 @@ Route::get('/news/create','NewsController@create');
 Route::post('/news/store','NewsController@store');
 Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
 Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');
+
+Route::get('/home', 'HomesController@index');
