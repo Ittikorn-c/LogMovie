@@ -14,10 +14,17 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
       $news = News::all();
         return view('news.index', ['news' => $news]);
+    }
+    public function adminindex()
+    {
+        //
+        $news = News::all();
+        return view('admin/news-index', ['news' => $news]);
     }
 
     /**

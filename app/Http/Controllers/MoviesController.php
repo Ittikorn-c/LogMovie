@@ -17,11 +17,13 @@ class MoviesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function adminindex()
     {
         $movies = Movie::all();
 
         return view('movies.index', ["movies" => $movies]);
+// ADMIN
+        return view('admin/movies-index', ['movies' => $movies]);
     }
 
     /**
@@ -159,6 +161,9 @@ class MoviesController extends Controller
             $review = 0;
             return view('movies.show', ["movie"=>$movie, "review"=>$review, "pics"=>$pics, "rate"=>$rate]);
         }
+        // ADMIN
+         return view('admin/movies-show', ['movie' => $movie]);
+
     }
 
     /**
@@ -179,6 +184,8 @@ class MoviesController extends Controller
         'black-white' => false
       ];
         return view('movies.edit', ["movie"=>$movie,"genres"=>$genres, "color"=>$color]);
+// ADMIN
+        return view('admin/movies-edit', ['movie' => $movie]);
     }
 
     /**
