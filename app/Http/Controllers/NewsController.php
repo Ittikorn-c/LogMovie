@@ -43,7 +43,7 @@ class NewsController extends Controller
         'images' => 'required',
         'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'references' => 'required',
-        'detail' => 'required|min:100',
+        'detail' => 'required',
       ],[]);
 
       $news = new News;
@@ -66,9 +66,7 @@ class NewsController extends Controller
           }
         }
         if($upload){
-          return redirect()
-          ->back()
-          ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
+          return redirect("/news/".$new->id);
         }
     }
 
@@ -140,6 +138,7 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+      $news->delete();
+      return redirect('/news');
     }
 }

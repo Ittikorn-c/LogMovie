@@ -46,21 +46,6 @@
 <div class="container">
   <div class="body">
   <h1>Create News Page</h1>
-  @if (count($errors) > 0)
-    <div class="alert alert-danger">
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-    </div>
-  @endif
-  @if(Session::has('status'))
-    <div class="alert alert-{{ Session::get('status') }}" role="alert">
-      <p>{{ Session::get('message') }}</p>
-    </div>
-  @endif
   <form runat="server" class="form-horizontal" novalidate enctype="multipart/form-data" method="post" action="/news/store">
     {{ csrf_field() }}
     <div class="form-group">

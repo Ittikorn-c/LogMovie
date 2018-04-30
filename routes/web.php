@@ -19,13 +19,15 @@ Route::resource('/movies', 'MoviesController');
 Route::resource('/likereviews', 'LikeReviewsController');
 Route::resource('/userreviews', 'UserReviewsController');
 Route::get('/timelines/{user}', 'TimeLinesController@show')->where('user', '[0-9]+');
-Route::get('/mod',"ModController@index");
 Route::get('/movies/create','MoviesController@create');
 Route::post('/movies/store','MoviesController@store');
+
+Route::get('/mod',"ModController@index");
 
 Route::get('/movies/{movie}/edit', 'MoviesController@edit')->where('movie', '[0-9]+');
 Route::put('/movies/{movie}', 'MoviesController@update')->where('movie', '[0-9]+');
 Route::get('/movies/{movie}', 'MoviesController@show')->where('movie', '[0-9]+');
+Route::delete('/movies/{movie}', 'MoviesController@destroy');
 
 Route::get('/news','NewsController@index');
 Route::get('/news/create','NewsController@create');
@@ -33,6 +35,7 @@ Route::post('/news/store','NewsController@store');
 Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
 Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');
 Route::get('/news/{news}', 'NewsController@show')->where('news', '[0-9]+');
+
 
 Route::get('{folder}/{filename}', function ($folder, $filename)
 {

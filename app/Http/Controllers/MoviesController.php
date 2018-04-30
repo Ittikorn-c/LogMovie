@@ -20,7 +20,6 @@ class MoviesController extends Controller
     public function index()
     {
         $movie = Movie::all();
-
         return view('movies.index', ["movie" => $movie]);
     }
 
@@ -247,7 +246,8 @@ class MoviesController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+      $movie->delete();
+      return redirect('/movies');
     }
 
     public function pic($path){
