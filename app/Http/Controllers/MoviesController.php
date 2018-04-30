@@ -127,10 +127,19 @@ class MoviesController extends Controller
      */
     public function show(Movie $movie)
     {
-        $max = UserReview::max('rate');
-        $review = UserReview::where('rate', '=', $max)->get()[0];
-        $like = LikeReview::where('movie_id', '=', $movie->id)->count();
-        return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like]);
+        $pics = ImageMovie::where('movie_id', '=', $movie->id)->get();
+        $max = UserReview::where('movie_id', '=', $movie->id)->max('rate');
+        $reviews = UserReview::where('movie_id', '=', $movie->id)->where('rate', '=', $max)->get();
+
+        $count = count($reviews);
+        if($count > 0){
+            $review = $reviews[0];
+            $like = LikeReview::where('review_id', '=', $review->id)->count();
+            return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like, "pics"=>$pics]);
+        }
+        else{
+            return view('movies.show', ["movie"=>$movie, "pics"=>$pics]);
+        }
     }
 
     /**

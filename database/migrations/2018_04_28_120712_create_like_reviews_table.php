@@ -16,7 +16,7 @@ class CreateLikeReviewsTable extends Migration
         Schema::create('like_reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('movie_id');
+            $table->unsignedInteger('review_id');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -24,9 +24,9 @@ class CreateLikeReviewsTable extends Migration
             ->on('users')
             ->onDelete('cascade');
 
-            $table->foreign('movie_id')
+            $table->foreign('review_id')
             ->references('id')
-            ->on('movies')
+            ->on('user_reviews')
             ->onDelete('cascade');
         });
     }

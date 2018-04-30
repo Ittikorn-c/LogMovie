@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\LikeReview;
+use App\User;
+use App\UserReview;
 use Illuminate\Http\Request;
 
-class LikeReviewsController extends Controller
+class TimeLinesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,40 +36,28 @@ class LikeReviewsController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'user_id' => 'required|unique:like_reviews,user_id',
-            'movie_id' => 'required|unique:like_reviews,movie_id'
-        ]);
-
-        try {
-            $likereview = new LikeReview;
-            $likereview->user_id = 1;
-            $likereview->review_id = $request->input('review_id');
-            $likereview->save();
-            return  redirect()->back();
-        }catch(\Illuminate\Database\QueryException $errors) {
-            return "error";
-        }
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\LikeReview  $likeReview
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(LikeReview $likeReview)
+    public function show(User $user)
     {
-        //
+        $reviews = UserReview::where('user_id', '=', $user->id)->get();
+        return view('timeline.show', ["user"=>$user, "reviews"=>$reviews]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\LikeReview  $likeReview
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(LikeReview $likeReview)
+    public function edit(User $user)
     {
         //
     }
@@ -77,10 +66,10 @@ class LikeReviewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LikeReview  $likeReview
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LikeReview $likeReview)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -88,10 +77,10 @@ class LikeReviewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\LikeReview  $likeReview
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LikeReview $likeReview)
+    public function destroy(User $user)
     {
         //
     }
