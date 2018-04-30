@@ -1,20 +1,51 @@
 @extends("layouts/master")
 
-<style media="screen">
-  img {
-    max-width: 200px;
-    margin: 10px;
-  }
-</style>
-
 
 @section("header")
 
 @endsection
 
 @section("content")
+
+<style media="screen">
+      img {
+        max-width: 200px;
+        margin: 10px;
+      }
+      .custom-file-label {
+        overflow: hidden;
+      }
+      .body {
+        margin-top: 12%;
+        margin-bottom: 5%;
+        padding: 20px 70px;
+        background-color: #e1e2ec;
+        border-width: 20px;
+        border-radius: 20px;
+      }
+      h1 {
+        font-size: 60px;
+        text-align: center;
+        margin: 40px ;
+      }
+      .form-group{
+        font-size: 17px;
+      }
+      #thumbnail {
+        font-size: 17px;
+        min-height: 150px;
+      }
+
+      input[type=submit]:hover
+  		{
+        color: #9c9da4;
+        background-color: #f0f8ff;
+  		}
+</style>
+
 <div class="container">
-  <h1>Create New Page</h1>
+  <div class="body">
+  <h1>Create News Page</h1>
   @if (count($errors) > 0)
     <div class="alert alert-danger">
     <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -32,40 +63,55 @@
   @endif
   <form runat="server" class="form-horizontal" novalidate enctype="multipart/form-data" method="post" action="/news/store">
     {{ csrf_field() }}
-      <div id="title_field" class="form-inline">
-        <label>Title : </label>
-        <input value="{{ old('title') }}" type="text" name="title" required class="form-control"/>
-        @if ($errors->has('title'))
-        <div class="text-danger">{{ $errors->first('title') }}</div>
-        @endif
-      </div>
-      <div id="images_select" class="form-inline">
-        <label>Select images : </label>
-        <input id="file_upload" type="file" class="form-control" name="images[]" placeholder="address" multiple>
-        @if ($errors->has('images'))
-        <div class="text-danger">{{ $errors->first('images') }}</div>
-        @endif
-      </div>
-      <label>Preview : </label>
-      <div id="thumbnail"></div>
-      <div id="detail_field" class="form-inline">
-        <label>Detail : </label>
-        <textarea type="text" name="detail" required class="form-control">{{ old('detail') }}</textarea>
-        @if ($errors->has('detail'))
-        <div class="text-danger">{{ $errors->first('detail') }}</div>
-        @endif
-      </div>
-      <div id="references_field" class="form-inline">
-        <label>References : </label>
-        <input value="{{ old('references') }}" type="text" name="references" required class="form-control"/>
-        @if ($errors->has('references'))
-        <div class="text-danger">{{ $errors->first('references') }}</div>
-        @endif
-      </div>
     <div class="form-group">
-      <input type="submit" value="Save Image" class="btn btn-info">
+      <div class="form-group row">
+        <label for="title_field" class="col-sm-3 col-form-label">Title : </label>
+        <div class="col-sm-7">
+          <input id="title_field" value="{{ old('title') }}" type="text" name="title" required class="form-control"/>
+        </div>
+      </div>
+      @if ($errors->has('title'))
+      <div class="text-danger col-sm-12">{{ $errors->first('title') }}</div>
+      @endif
+      <div class="form-group row">
+        <label for="file_upload" class="col-sm-3 col-form-label">Select images : </label>
+        <div class="col-sm-5">
+          <input id="file_upload" type="file" class="form-control" name="images[]" placeholder="address" multiple>
+        </div>
+      </div>
+      @if ($errors->has('images'))
+      <div class="text-danger col-sm-12">{{ $errors->first('images') }}</div>
+      @endif
+      <div class="form-group row">
+        <label for="thumbnail" class="col-sm-3 col-form-label">Preview : </label>
+        <div class="col-sm-9">
+          <div id="thumbnail"></div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="detail_field" class="col-sm-3 col-form-label">Detail : </label>
+        <div class="col-sm-9">
+          <textarea rows="10" id="detail_field" type="text" name="detail" required class="form-control">{{ old('detail') }}</textarea>
+        </div>
+      </div>
+      @if ($errors->has('detail'))
+      <div class="text-danger col-sm-12">{{ $errors->first('detail') }}</div>
+      @endif
+      <div class="form-group row">
+        <label for="references_field" class="col-sm-3 col-form-label">References : </label>
+        <div class="col-sm-9">
+            <input id="references_field" value="{{ old('references') }}" type="text" name="references" required class="form-control"/>
+        </div>
+      </div>
+      @if ($errors->has('references'))
+      <div class="text-danger col-sm-12">{{ $errors->first('references') }}</div>
+      @endif
+    <div class="form-group">
+      <center><input type="submit" value="Submit" class="btn btn-secondary btn-lg"/></center>
     </div>
+  </div>
   </form>
+  </div>
 </div>
 <script type="text/javascript" >
   $(function () {

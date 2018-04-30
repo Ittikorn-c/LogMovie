@@ -32,6 +32,11 @@
         font-size: 17px;
         min-height: 150px;
       }
+      input[type=submit]:hover
+  		{
+        color: #9c9da4;
+        background-color: #f0f8ff;
+  		}
 </style>
 
 @section("content")
@@ -168,7 +173,7 @@
                 @else
                   <option value="{{ $value }}">{{ $key }}</option>
                 @endif
-              @endforeach;
+              @endforeach
             </select>
           </div>
       </div>
@@ -217,7 +222,7 @@
       <div class="text-danger col-sm-12">{{ $errors->first('images') }}</div>
       @endif
     </div>
-      <input type="submit" value="Save Image" class="btn btn-secondary btn-lg active">
+      <input type="submit" value="Save Image" class="btn btn-secondary btn-lg">
     </div>
   </form>
 </div>

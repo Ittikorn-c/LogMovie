@@ -26,7 +26,26 @@ Route::get('/movies/{movie}/edit', 'MoviesController@edit')->where('movie', '[0-
 Route::put('/movies/{movie}', 'MoviesController@update')->where('movie', '[0-9]+');
 Route::get('/movies/{movie}', 'MoviesController@show')->where('movie', '[0-9]+');
 
+Route::get('/news','NewsController@index');
 Route::get('/news/create','NewsController@create');
 Route::post('/news/store','NewsController@store');
 Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
 Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');
+Route::get('/news/{news}', 'NewsController@show')->where('news', '[0-9]+');
+
+Route::get('{folder}/{filename}', function ($folder, $filename)
+{
+    $path = storage_path('app/public/'.$folder.'/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});

@@ -82,8 +82,8 @@ class MoviesController extends Controller
         if($cover=$request->file('cover_image')){
             $cover_ext = $cover->getClientOriginalExtension();
             $cover_name="cover".time().'.'.$cover_ext;
-            $cover_upload = $cover->move(
-              public_path().'/cover_images_movies', $cover_name);
+            $cover_upload = $cover->storeAs(
+              'public/cover_images_movies', $cover_name);
             if ($cover_upload) {
               $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
             }
@@ -94,8 +94,8 @@ class MoviesController extends Controller
           foreach($files as $file){
             $ext = $file->getClientOriginalExtension();
             $name=time().$n.'.'.$ext;
-            $upload = $file->move(
-              public_path().'/images_movies', $name);
+            $upload = $file->storeAs(
+              'public/images_movies', $name);
               $n++;
               $image = new ImageMovie;
               $image->movie_id = $movie->id;
@@ -192,8 +192,8 @@ class MoviesController extends Controller
       if($cover=$request->file('cover_image')){
           $cover_ext = $cover->getClientOriginalExtension();
           $cover_name="cover".time().'.'.$cover_ext;
-          $cover_upload = $cover->move(
-            public_path().'/cover_images_movies', $cover_name);
+          $cover_upload = $cover->storeAs(
+            'public/cover_images_movies', $cover_name);
           if ($cover_upload) {
             $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
           }
@@ -205,7 +205,7 @@ class MoviesController extends Controller
           $ext = $file->getClientOriginalExtension();
           $name=time().$n.'.'.$ext;
           $upload = $file->move(
-            public_path().'/images_movies', $name);
+            'public/images_movies', $name);
             $n++;
             $image = new ImageMovie;
             $image->movie_id = $movie->id;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\News;
 use App\ImagesNews;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -15,7 +16,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('news.index');
+      $news = News::all();
+        return view('news.index', ['news' => $news]);
     }
 
     /**
@@ -54,12 +56,12 @@ class NewsController extends Controller
         foreach($files as $file){
           $ext = $file->getClientOriginalExtension();
           $name=time().$n.'.'.$ext;
-          $upload = $file->move(
-            public_path().'/images_news', $name);
+          $upload = $file->storeAs(
+            'public/images_news', $name);
             $n++;
             $image = new ImagesNews;
             $image->news_id = $news->id;
-            $image->image = public_path().'images_news' . '/' . $name;
+            $image->image = 'images_news' . '/' . $name;
             $image->save();
           }
         }
@@ -78,7 +80,11 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+        $imagesnews =  ImagesNews::where('news_id', '=', $news->id)->get();
+        $morenews = News::select('id','title','updated_at')->orderBy('updated_at')->limit(7)->get();
+        $imagesnewscover =  ImagesNews::where('news_id', '=', $news->id)->get()[0];
+        $newsdaytime = explode(" ", $news->created_at);
+        return view('news.show', ['news' => $news, 'imagesnews' => $imagesnews, "imagesnewscover" => $imagesnewscover, "newsday" => $newsdaytime[0], 'morenews' => $morenews]);
     }
 
     /**
@@ -101,30 +107,29 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-      // $news->title = $request->input('title');
-      // $news->detail = $request->input('detail');
-      // $news->references = $request->input('references');
-      // // $news->save();
-      // if($files=$request->file('images')){
-      //   $n = 1;
-      //   foreach($files as $file){
-      //     $ext = $file->getClientOriginalExtension();
-      //     $name=time().$n.'.'.$ext;
-      //     $upload = $file->move(
-      //       public_path().'images_news', $name);
-      //       $n++;
-      //       $image = new ImagesNews;
-      //       $image->news_id = $news->id;
-      //       $image->image = 'images_news' . '/' . $name;
-            // $image->save();
-        //   }
-        // }
-        // if($upload){
-          // return redirect()
-          // ->back()
-          // ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
-        // }
-        return "Yeahhhhhhhhhh";
+      $news->title = $request->input('title');
+      $news->detail = $request->input('detail');
+      $news->references = $request->input('references');
+      $news->save();
+      if($files=$request->file('images')){
+        $n = 1;
+        foreach($files as $file){
+          $ext = $file->getClientOriginalExtension();
+          $name=time().$n.'.'.$ext;
+          $upload = $file->storeAs(
+            'public/images_news', $name);
+            $n++;
+            $image = new ImagesNews;
+            $image->news_id = $news->id;
+            $image->image = 'images_news' . '/' . $name;
+            $image->save();
+          }
+        }
+        if($upload){
+          return redirect()
+          ->back()
+          ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
+        }
     }
 
     /**

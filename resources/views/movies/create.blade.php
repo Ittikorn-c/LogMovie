@@ -34,6 +34,11 @@
         font-size: 17px;
         min-height: 150px;
       }
+      input[type=submit]:hover
+  		{
+        color: #9c9da4;
+        background-color: #f0f8ff;
+  		}
 </style>
 
 <div class="container">
@@ -168,7 +173,7 @@
                 @else
                   <option value="{{ $value }}">{{ $key }}</option>
                 @endif
-              @endforeach;
+              @endforeach
             </select>
           </div>
       </div>
@@ -218,7 +223,7 @@
       @endif
     </div>
     <div class="form-group">
-      <input type="submit" value="Save Image" class="btn btn-secondary btn-lg active">
+      <center><input type="submit" value="Save Image" class="btn btn-secondary btn-lg"></center>
     </div>
   </form>
   </div>

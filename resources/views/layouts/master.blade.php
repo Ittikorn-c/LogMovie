@@ -88,7 +88,7 @@ nav ul li a.active{
 }
 
 .content{
-    
+
 }
 .content p{
     width: 9000px;
@@ -102,6 +102,15 @@ nav ul li a.active{
 <body>
 
 <div class="wrapper">
+
+    <div>
+        @yield('header')
+    </div>
+
+    <section class="content">
+        @yield('content')
+    </section>
+
     <nav>
         <div class="logo">LogMovie</div>
         <ul>
@@ -112,14 +121,6 @@ nav ul li a.active{
             <li><a class="active" href="#">Log In</a></li>
         </ul>
     </nav>
-
-    <div>
-        @yield('header')
-    </div>
-    
-    <section class="content">
-        @yield('content')
-    </section>
 </div>
 
 <script type="text/javascript">
