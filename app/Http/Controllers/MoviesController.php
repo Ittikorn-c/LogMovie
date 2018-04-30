@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Movie;
 use App\ImageMovie;
 use App\Genre;
+use App\UserReview;
+use App\LikeReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MoviesController extends Controller
 {
@@ -16,7 +19,9 @@ class MoviesController extends Controller
      */
     public function index()
     {
+        $movies = Movie::all();
 
+        return view('movies.index', ["movies" => $movies]);
     }
 
     /**
@@ -33,7 +38,7 @@ class MoviesController extends Controller
       ];
       $color = [
         'color' => true,
-        'black-white' => false
+        'black-white' => false,
       ];
         return view('movies.create', ["genres"=>$genres, "color"=>$color]);
     }
@@ -46,6 +51,7 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $validatedData = $request->validate([
           'name' => 'required',
           'images' => 'required',
@@ -61,8 +67,7 @@ class MoviesController extends Controller
           'color' => 'required',
           'aspect_ratio' => 'required',
           'genres' => 'required',
-        ],[]);
-
+        ]);
         $movie = new Movie;
         $movie->name = $request->input('name');
         $movie->vdo = $request->input('vdo');
@@ -72,15 +77,17 @@ class MoviesController extends Controller
         $movie->gross = $request->input('gross');
         $movie->cumulative = $request->input('cumulative');
         $movie->runtime = $request->input('runtime');
-        $movie->color = true;
+        $movie->color = $request->input('color');
         $movie->aspect_ratio = $request->input('aspect_ratio');
         if($cover=$request->file('cover_image')){
             $cover_ext = $cover->getClientOriginalExtension();
             $cover_name="cover".time().'.'.$cover_ext;
-            $cover_upload = $cover->move(
-              public_path().'/cover_images_movies', $cover_name);
+            $cover_upload = $cover->storeAs(
+              'public/cover_images_movies', $cover_name);
             if ($cover_upload) {
-              $movie->cover_image = '/cover_images_movies' . '/' . $cover_name;
+
+              $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
+
             }
         }
         $movie->save();
@@ -89,12 +96,14 @@ class MoviesController extends Controller
           foreach($files as $file){
             $ext = $file->getClientOriginalExtension();
             $name=time().$n.'.'.$ext;
-            $upload = $file->move(
-              public_path().'/images_movies', $name);
+            $upload = $file->storeAs(
+              'public/images_movies', $name);
               $n++;
               $image = new ImageMovie;
               $image->movie_id = $movie->id;
-              $image->image = '/images_movies' . '/' . $name;
+
+              $image->image = 'images_movies' . '/' . $name;
+
               $image->save();
             }
           }
@@ -107,9 +116,10 @@ class MoviesController extends Controller
             }
           }
           if($upload && $cover_upload){
-            return redirect()
-            ->back()
-            ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
+            return redirect("/movies/".$movie->id);
+            // return redirect()
+            // ->back()
+            // ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
           }
       }
 
@@ -120,8 +130,35 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
-    {
-        //
+    {   
+        $rateavr = 0;
+        $n = 0;
+        $rates = UserReview::where('movie_id', '=',  $movie->id)->get();
+        if($rates->count() != 0){
+            foreach ($rates as $rate){
+                $rateavr += $rate->rate;
+                $n += 1;
+            }
+            $rate = $rateavr/$n;
+        }
+        else{
+            $rate = 'None';
+        }
+        
+        $pics = ImageMovie::where('movie_id', '=', $movie->id)->get();
+        $max = UserReview::where('movie_id', '=', $movie->id)->max('rate');
+        $reviews = UserReview::where('movie_id', '=', $movie->id)->where('rate', '=', $max)->get();
+
+        $count = count($reviews);
+        if($count > 0){
+            $review = $reviews[0];
+            $like = LikeReview::where('review_id', '=', $review->id)->count();
+            return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like, "pics"=>$pics, "rate"=>$rate]);
+        }
+        else{
+            $review = 0;
+            return view('movies.show', ["movie"=>$movie, "review"=>$review, "pics"=>$pics, "rate"=>$rate]);
+        }
     }
 
     /**
@@ -183,10 +220,12 @@ class MoviesController extends Controller
       if($cover=$request->file('cover_image')){
           $cover_ext = $cover->getClientOriginalExtension();
           $cover_name="cover".time().'.'.$cover_ext;
-          $cover_upload = $cover->move(
-            public_path().'/cover_images_movies', $cover_name);
+          $cover_upload = $cover->storeAs(
+            'public/cover_images_movies', $cover_name);
           if ($cover_upload) {
-            $movie->cover_image = '/cover_images_movies' . '/' . $cover_name;
+
+            $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
+
           }
       }
       $movie->save();
@@ -196,11 +235,13 @@ class MoviesController extends Controller
           $ext = $file->getClientOriginalExtension();
           $name=time().$n.'.'.$ext;
           $upload = $file->move(
-            public_path().'/images_movies', $name);
+            'public/images_movies', $name);
             $n++;
             $image = new ImageMovie;
             $image->movie_id = $movie->id;
-            $image->image = '/images_movies' . '/' . $name;
+
+            $image->image = 'images_movies' . '/' . $name;
+
             $image->save();
           }
         }
@@ -213,9 +254,10 @@ class MoviesController extends Controller
           }
         }
         if($upload && $cover_upload){
-          return redirect()
-          ->back()
-          ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
+          return redirect("/movies/".$movie->id);
+          // return redirect()
+          // ->back()
+          // ->with(['status' => 'success', 'message' => 'Image uploaded successfully!']);
         }
     }
 
@@ -228,5 +270,10 @@ class MoviesController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    public function pic($path){
+        $url = Storage::url($path);
+        return $url;
     }
 }

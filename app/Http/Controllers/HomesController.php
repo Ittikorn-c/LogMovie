@@ -23,7 +23,7 @@ class HomesController extends Controller
         $movies = Movie::orderBy('created_at', 'desc')->take(6)->get();
         $news = News::orderBy('created_at', 'desc')->take(4)->get();
 
-        return view('home.index', ['movies' => $movies, 'news' => $news]);
+        return view('homepage.index', ['movies' => $movies, 'news' => $news]);
     }
 
     /**

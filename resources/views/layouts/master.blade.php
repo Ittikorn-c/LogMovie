@@ -4,9 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel=stylesheet>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 <style>
 body {
@@ -60,6 +62,7 @@ nav ul li a{
     line-height: 80px;
     color: #151515;
     padding: 12px 30px;
+    font-size: 18px;
     text-decoration: none;
     text-transform: uppercase;
     transition: .3s;
@@ -82,19 +85,16 @@ nav ul li a.active{
 .text-head{
     font-size: 80px;
     color: #fff;
-    text-align: center;
-    border: 1px solid #ccc;
-    position: absolute;
-    top: 50%;
-    width: 100%;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.8);
 }
 
 .content{
-    
+
 }
 .content p{
     width: 9000px;
-    margin: 30px auto;
+
     text-align: justify;
     font-size: 20px;
     line-height: 30px;
@@ -104,12 +104,10 @@ nav ul li a.active{
 <body>
 
 <div class="wrapper">
-    
-
     <div>
         @yield('header')
     </div>
-    
+
     <section class="content">
         @yield('content')
     </section>
@@ -125,6 +123,33 @@ nav ul li a.active{
         </ul>
     </nav>
 </div>
+
+<footer class="page-footer font-small indigo pt-0" style="background-color:lightgrey">
+    <div class="footer-copyright py-3 text-center">
+    <div>
+                    <a class="fb-ic">
+                        <i class="fab fa-facebook-square"></i>
+                    </a>
+                    <a class="tw-ic">
+                        <i class="fab fa-twitter-square"></i>
+                    </a>
+                    <a class="gplus-ic">
+                        <i class="fab fa-google-plus-square"></i>
+                    </a>
+                    <a class="li-ic">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a class="ins-ic">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="pin-ic">
+                        <i class="fab fa-pinterest-square"></i>
+                    </a>
+                </div>
+        LOG MOVIE
+    </div>
+</footer>
+
 
 <script type="text/javascript">
     $(window).on('scroll', function(){

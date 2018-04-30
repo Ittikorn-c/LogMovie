@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-	public function newsImage() {
-		return $this->hasMany('App\ImagesNews', 'news_id');
-	}
+	
+  public function imgs(){
+    return $this->hasMany('App\ImagesNews', 'news_id');
+  }
+
 }
