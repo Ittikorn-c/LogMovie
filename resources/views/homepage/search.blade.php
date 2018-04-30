@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@section('header')
-
-@endsection
-
 @section('content')
 <br><br><br><br>
 	<div class="body_main container" style="">
@@ -24,10 +20,10 @@
 	              <mark style="background: white;padding: 0px">
 	                Movies
 	              </mark>
-	          </div>
+	          </div> 
 	          <div class="col-sm-6" style="text-align: right;">
-	           
-	          </div>
+	            <a class="" href="movies" style="font-size: 80%;display: inline;color: white">See all..</a>
+	          </div> 
 	        </div>
 	      </h3>
 	      <div class="row" id="myTable" style="margin-left: 5em;">
@@ -43,11 +39,11 @@
 	        @endforeach
 	        <br>
 	      </div>
-	      <br>
+	      <br>  
 	    </div>
 	    <br>
 
-
+	    
 		<br><br>
 	</div>
 @endsection
@@ -62,5 +58,5 @@
     });
   });
 });
-
+  
 </script>

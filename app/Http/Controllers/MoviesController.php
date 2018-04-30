@@ -19,8 +19,9 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $movie = Movie::all();
-        return view('movies.index', ["movie" => $movie]);
+        $movies = Movie::all();
+
+        return view('movies.index', ["movies" => $movies]);
     }
 
     /**
@@ -84,7 +85,9 @@ class MoviesController extends Controller
             $cover_upload = $cover->storeAs(
               'public/cover_images_movies', $cover_name);
             if ($cover_upload) {
+
               $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
+
             }
         }
         $movie->save();
@@ -98,7 +101,9 @@ class MoviesController extends Controller
               $n++;
               $image = new ImageMovie;
               $image->movie_id = $movie->id;
+
               $image->image = 'images_movies' . '/' . $name;
+
               $image->save();
             }
           }
@@ -125,7 +130,7 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
-    {   
+    {
         $rateavr = 0;
         $n = 0;
         $rates = UserReview::where('movie_id', '=',  $movie->id)->get();
@@ -139,7 +144,7 @@ class MoviesController extends Controller
         else{
             $rate = 'None';
         }
-        
+
         $pics = ImageMovie::where('movie_id', '=', $movie->id)->get();
         $max = UserReview::where('movie_id', '=', $movie->id)->max('rate');
         $reviews = UserReview::where('movie_id', '=', $movie->id)->where('rate', '=', $max)->get();
@@ -218,7 +223,9 @@ class MoviesController extends Controller
           $cover_upload = $cover->storeAs(
             'public/cover_images_movies', $cover_name);
           if ($cover_upload) {
+
             $movie->cover_image = 'cover_images_movies' . '/' . $cover_name;
+
           }
       }
       $movie->save();
@@ -232,7 +239,9 @@ class MoviesController extends Controller
             $n++;
             $image = new ImageMovie;
             $image->movie_id = $movie->id;
+
             $image->image = 'images_movies' . '/' . $name;
+
             $image->save();
           }
         }

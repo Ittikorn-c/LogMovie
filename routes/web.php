@@ -34,6 +34,11 @@ Route::get('/news/create','NewsController@create');
 Route::post('/news/store','NewsController@store');
 Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
 Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');
+
+
+Route::get('/homepage', 'HomesController@index');
+Route::get('/homepage/search', 'SearchController@index');
+
 Route::get('/news/{news}', 'NewsController@show')->where('news', '[0-9]+');
 
 
@@ -64,3 +69,4 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 // Other routes
 Route::get('/home', 'HomeController@index')->name('home');
+
