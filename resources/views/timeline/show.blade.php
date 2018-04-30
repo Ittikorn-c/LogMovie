@@ -45,7 +45,7 @@
                     
                     <hr>
                     @foreach($reviews as $review)
-                    <center><div class="w3-card-4 w3-margin" style="width:50%;">
+                    <center><div class="w3-card-4 w3-margin" style="width:60%;">
                         <a href="/movies/{{ $review->movie->id }}"><div class="w3-display-container w3-text-white">
                             <img src="../{{ $review->movie->cover_image }}" style="width:100%">
                             <div class="w3-xlarge w3-display-bottomleft w3-padding">{{ $review->movie->name }}</div>
