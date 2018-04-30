@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::resource('/movies', 'MoviesController');
 Route::resource('/likereviews', 'LikeReviewsController');
 Route::resource('/userreviews', 'UserReviewsController');
+Route::get('/timelines/{user}', 'TimeLinesController@show')->where('user', '[0-9]+');
 Route::get('/mod',"ModController@index");
 Route::get('/movies/create','MoviesController@create');
 Route::post('/movies/store','MoviesController@store');
@@ -29,3 +30,20 @@ Route::get('/news/create','NewsController@create');
 Route::post('/news/store','NewsController@store');
 Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
 Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');
+
+Route::get('{folder}/{filename}', function ($folder, $filename)
+{
+    $path = storage_path('app/public/'.$folder.'/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
