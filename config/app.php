@@ -147,6 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Felixkiss\UniqueWithValidator\ServiceProvider::class,
+        SebastiaanLuca\ConditionalProviders\Providers\ConditionalProvidersServiceProvider::class,
 
         /*
          * Package Service Providers...

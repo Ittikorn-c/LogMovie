@@ -35,25 +35,37 @@ class UserReviewsController extends Controller
      */
     public function store(Request $request)
     {
+      
+            if(\Auth::user()->role != "user"){
+                return '/';
+            }
+        
         $validatedData = $request->validate([
-            'user_id'=>'required|unique_with:user_reviews,movie_id',
             'movie_id' => 'required',
             'rate' => 'required',
             'header' => 'required',
             'review' => 'required'
         ]);
-        try {
-            $userreview = new UserReview;
-            $userreview->user_id = $request->input('user_id');
-            $userreview->movie_id = $request->input('movie_id');
-            $userreview->rate = $request->input('rate');
-            $userreview->header = $request->input('header');
-            $userreview->review = $request->input('review');
-            $userreview->save();
-            return  redirect()->back();
-        } catch(\Illuminate\Database\QueryException $errors) {
-            return "error";
-            return  redirect()->back();
+
+        $user = $request->user()->id;
+        $movie_id = $request->input('movie_id');
+        $review = UserReview::where('user_id', '=', $user)->where('movie_id', '=', $movie_id)->count();
+        if($review == 0){
+            try {
+                $userreview = new UserReview;
+                $userreview->user_id = $request->user()->id;
+                $userreview->movie_id = $request->input('movie_id');
+                $userreview->rate = $request->input('rate');
+                $userreview->header = $request->input('header');
+                $userreview->review = $request->input('review');
+                $userreview->save();
+                return  redirect()->back();
+            } catch(\Illuminate\Database\QueryException $errors) {
+                return  redirect()->back();
+            }
+        }
+        else{
+            return "xxx";
         }
     }
 
