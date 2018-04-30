@@ -1,6 +1,6 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
 
 // Variables
 @import "variables";
@@ -8,7 +8,20 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Customs
+@import 'helper';
+@import 'minimal_form';
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.lm-sm-link {
+  text-decoration: none;
+  color: #ef5b25;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+

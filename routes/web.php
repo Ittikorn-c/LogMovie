@@ -49,3 +49,14 @@ Route::get('{folder}/{filename}', function ($folder, $filename)
 
     return $response;
 });
+
+// Basic Auth
+Auth::routes();
+
+// OAuth
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+
+// Other routes
+Route::get('/home', 'HomeController@index')->name('home');
