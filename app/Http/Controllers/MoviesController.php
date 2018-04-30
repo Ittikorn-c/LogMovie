@@ -138,7 +138,8 @@ class MoviesController extends Controller
             return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like, "pics"=>$pics]);
         }
         else{
-            return view('movies.show', ["movie"=>$movie, "pics"=>$pics]);
+            $review = 0;
+            return view('movies.show', ["movie"=>$movie, "review"=>$review, "pics"=>$pics]);
         }
     }
 

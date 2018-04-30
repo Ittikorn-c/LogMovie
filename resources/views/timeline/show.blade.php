@@ -45,7 +45,7 @@
                     
                     <hr>
                     @foreach($reviews as $review)
-                    <div class="w3-card-4 w3-margin" style="width:50%;">
+                    <center><div class="w3-card-4 w3-margin" style="width:50%;">
                         <a href="/movies/{{ $review->movie->id }}"><div class="w3-display-container w3-text-white">
                             <img src="../{{ $review->movie->cover_image }}" style="width:100%">
                             <div class="w3-xlarge w3-display-bottomleft w3-padding">{{ $review->movie->name }}</div>
@@ -74,7 +74,7 @@
                                 <p style="margin: 5px"><a href="javascript:{}" onclick="document.getElementById('likeForm-{{$review->id}}').submit();"><i class="far fa-heart"></i></a> Like: {{ $review->countLike() }}</p>
                             </form>
                         </div>
-                    </div>
+                    </div></center>
                     @endforeach
                 </div>
             </div>

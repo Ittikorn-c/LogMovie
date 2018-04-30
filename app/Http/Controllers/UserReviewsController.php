@@ -36,8 +36,7 @@ class UserReviewsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'user_id' => 'required|unique:user_reviews,user_id',
-            'movie_id' => 'required|unique:user_reviews,movie_id',
+            'movie_id' => 'required',
             'rate' => 'required',
             'header' => 'required',
             'review' => 'required'
@@ -50,7 +49,6 @@ class UserReviewsController extends Controller
             $userreview->header = $request->input('header');
             $userreview->review = $request->input('review');
             $userreview->save();
-            return "ok";
             return  redirect()->back();
         } catch(\Illuminate\Database\QueryException $errors) {
             return "error";

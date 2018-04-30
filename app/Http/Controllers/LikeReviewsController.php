@@ -35,11 +35,6 @@ class LikeReviewsController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'user_id' => 'required|unique:like_reviews,user_id',
-            'movie_id' => 'required|unique:like_reviews,movie_id'
-        ]);
-
         try {
             $likereview = new LikeReview;
             $likereview->user_id = 1;

@@ -550,6 +550,7 @@ img.hover-shadow {
 <hr>
 <div class="row">
     <h1>User Reviews</h1>
+    @if($review !== 0)
     <p>                      
     @for($i = 0; $i < $review->rate; $i++)
         <span class="fa fa-star checked"></span>
@@ -568,6 +569,9 @@ img.hover-shadow {
     {{ csrf_field() }}
     <p><a href="javascript:{}" onclick="document.getElementById('likeform').submit();"><i class="far fa-heart"></i></a> Like: {{ $review->countLike() }}</p>
     </form>
+    @else
+    <p>None</p>
+    @endif
     <button id="reviewBtn" class=" w3-button w3-teal w3-round-large">Review this title</button>
 </div>
 <br>
