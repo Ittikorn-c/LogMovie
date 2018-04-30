@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserReview
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -27,6 +28,7 @@ class UsersController extends Controller
     public function create()
     {
         //
+         return view('admin/users-create');
     }
 
     /**
@@ -38,6 +40,13 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //
+         $user = new User;
+         $user->name = $request->input('name');
+         $user->password = bcrypt($request->input('password'));
+         $user->email = $request->input('email');
+         $user->role = $request->input('role');
+         $user->save();
+         return redirect('admin/users/' . $user->id);
     }
 
     /**
@@ -73,6 +82,10 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        return redirect('admin/users/' . $user->id);
     }
 
     /**
@@ -84,6 +97,9 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         //
+
+        $user->delete();
+        return redirect('/admin/users');
     }
 
     public function review(User $user){

@@ -1,10 +1,13 @@
-@extends('layouts.master')
+@extends('layout.master')
 @section('page-title')
 Edit User Infomation
 @endsection
 
 @section('content')
-<form action="/users/{{ $user->id }}" method="post" >
+<form action="/admin/users/{{ $user->id }}" method="post" >
+@method('PUT')
+@csrf
+	{{ csrf_field() }}
 
 <div >
 	<label> Name </label>
@@ -16,6 +19,6 @@ Edit User Infomation
 	<input type="text" name="email" value="{{ old('email') ?? $user->email}}" class="form-control"/>
 </div>
 <br>
-<button class="btn btn-primary">Save</button>
+<button class="btn btn-primary" type="submit">Save Change</button>
 </form>
 @endsection

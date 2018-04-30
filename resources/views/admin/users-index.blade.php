@@ -1,20 +1,16 @@
-@extends('layouts.master')
+@extends('layout.master')
 @section('page-title')
 Users
 @endsection
 
 @section('content')
 <br>
-<form action="post" class="">
-  <input type="text" name="name" class="form-control" placeholder="Search">
-  <br>
-  <input type="radio" name="type" value="all" > All
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="radio" name="type" value="mod" > Mod
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="radio" name="type" value="user"> User
-</form>
 
+<br>
+<a href="{{ url('/admin/users/create')}}">
+  <button type="button" class="btn btn-primary" >Add User</button>
+</a>
+<br>
 <br>
 <table class="table">
   <thead>
@@ -28,17 +24,22 @@ Users
   </thead>
   <tbody>
     @foreach($users as $user)
+  <form action="/admin/users/{{$user->id}}" method="post">
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>
-        <a href="{{ url('/users/' . $user->id) }}">
+        <a href="{{ url('/admin/users/' . $user->id) }}">
           {{ $user->name }}
         </a>
       </td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->role }}</td>
-    
+
+      @csrf
+      @method('DELETE')
+      <td><button  type="submit"  class="btn btn-danger btn-md">Delete</button></td>
     </tr>
+  </form>
     @endforeach
   </tbody>
 </table>

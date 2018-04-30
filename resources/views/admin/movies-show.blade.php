@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layout.master')
 @section('page-title')
 Movie Infomation
 @endsection
@@ -30,7 +30,7 @@ Movie Infomation
 	</textarea>
 </div>
 <br>
-<a href="{{ url('/movies/' . $movie->id) }}/edit">
+<a href="{{ url('/movies/' . $movie->id) }}">
 <button class="btn btn-primary">Edit</button>
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

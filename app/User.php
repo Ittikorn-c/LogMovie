@@ -33,4 +33,7 @@ class User extends Authenticatable
                      ->where('users.id','=', $id)
                      ->select('movies.name','user_reviews.review');
     }
+    public function isSuperAdmin(){
+        return $this->role==='admin';
+    }
 }

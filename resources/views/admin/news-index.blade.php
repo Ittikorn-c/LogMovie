@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('page-title')
-Movies
+News
 @endsection
 
 @section('content')
@@ -11,24 +11,21 @@ Movies
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Budget</th>
-      <th scope="col">Genre</th>
-      
+      <th scope="col">Title</th>
+      <th scope="col">Reference</th>
     </tr>
   </thead>
   <tbody>
-    @foreach($movies as $movie)
+    @foreach($news as $new)
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
       <td>
-        <a href="{{ url('/movies/' . $movie->id) }}">
-          {{ $movie->name }}
+        <a href="{{ url('/news/' . $new->id) }}">
+          {{ $new->title }}
         </a>
       </td>
-      <td>{{ $movie->budget }}</td>
+      <td>{{ $new->references }}</td>
 
-      <td>{{ $movie->genre->genres }}</td>
     
     </tr>  
     @endforeach
