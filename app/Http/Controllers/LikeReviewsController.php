@@ -35,14 +35,21 @@ class LikeReviewsController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $likereview = new LikeReview;
-            $likereview->user_id = 1;
-            $likereview->review_id = $request->input('review_id');
-            $likereview->save();
-            return  redirect()->back();
-        }catch(\Illuminate\Database\QueryException $errors) {
-            return "error";
+        $countlike = LikeReview::where('user_id', '=', '1')->where('review_id', '=', $request->input('review_id'))->count();
+        if($countlike == 0){
+            try {
+                
+                $likereview = new LikeReview;
+                $likereview->user_id = 1;
+                $likereview->review_id = $request->input('review_id');
+                $likereview->save();
+                return  redirect()->back();
+            }catch(\Illuminate\Database\QueryException $errors) {
+                return "error";
+            }
+        }
+        else{
+            return "OK LIKE";
         }
     }
 

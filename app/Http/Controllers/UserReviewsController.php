@@ -36,6 +36,7 @@ class UserReviewsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'user_id'=>'required|unique_with:user_reviews,movie_id',
             'movie_id' => 'required',
             'rate' => 'required',
             'header' => 'required',
@@ -43,7 +44,7 @@ class UserReviewsController extends Controller
         ]);
         try {
             $userreview = new UserReview;
-            $userreview->user_id = 1;
+            $userreview->user_id = $request->input('user_id');
             $userreview->movie_id = $request->input('movie_id');
             $userreview->rate = $request->input('rate');
             $userreview->header = $request->input('header');

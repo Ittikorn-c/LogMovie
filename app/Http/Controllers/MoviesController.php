@@ -126,7 +126,21 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
-    {
+    {   
+        $rateavr = 0;
+        $n = 0;
+        $rates = UserReview::where('movie_id', '=',  $movie->id)->get();
+        if($rates->count() != 0){
+            foreach ($rates as $rate){
+                $rateavr += $rate->rate;
+                $n += 1;
+            }
+            $rate = $rateavr/$n;
+        }
+        else{
+            $rate = 'None';
+        }
+        
         $pics = ImageMovie::where('movie_id', '=', $movie->id)->get();
         $max = UserReview::where('movie_id', '=', $movie->id)->max('rate');
         $reviews = UserReview::where('movie_id', '=', $movie->id)->where('rate', '=', $max)->get();
@@ -135,11 +149,11 @@ class MoviesController extends Controller
         if($count > 0){
             $review = $reviews[0];
             $like = LikeReview::where('review_id', '=', $review->id)->count();
-            return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like, "pics"=>$pics]);
+            return view('movies.show', ["movie"=>$movie, "review"=>$review, "like"=>$like, "pics"=>$pics, "rate"=>$rate]);
         }
         else{
             $review = 0;
-            return view('movies.show', ["movie"=>$movie, "review"=>$review, "pics"=>$pics]);
+            return view('movies.show', ["movie"=>$movie, "review"=>$review, "pics"=>$pics, "rate"=>$rate]);
         }
     }
 

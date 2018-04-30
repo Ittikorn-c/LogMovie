@@ -356,6 +356,9 @@ img.hover-shadow {
         @endif
     <div class="text-head w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
         {{ $movie->name }} 
+        <br>
+        <i class="fa fa-star checked"></i>
+        {{ $rate }}
     </div>
 </section>
 @endsection
@@ -463,6 +466,7 @@ img.hover-shadow {
         <form action="/userreviews" method="post">
         <input hidden type="text" id="rate" name="rate" value="">
         <input hidden type="text" id="movie_id" name="movie_id" value="{{ $movie->id }}">
+        <input hidden type="text" id="user_id" name="user_id" value="2">
         {{ csrf_field() }}
         <h3>YOUR REVIEW</h3>
         <input type="text" name="header" class="reviewinput" placeholder="Write a headline for your review here" width="100%">
@@ -478,7 +482,7 @@ img.hover-shadow {
 <hr>
 <div class="row">
     <h1>Video</h1>
-    <p><iframe width="420" height="345" src={{$movie->vdo}}></iframe></p>
+    <p><iframe width="1100" height="600" src={{$movie->vdo}}></iframe></p>
 </div>
 <hr>
 <div class="row">
