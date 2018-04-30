@@ -208,7 +208,7 @@
       @endif
     </div>
     <div class="form-group">
-      <center><input type="submit" value="Save Image" class="btn btn-secondary btn-lg"></center>
+      <center><input type="submit" value="Submit" class="btn btn-secondary btn-lg"></center>
     </div>
   </form>
   </div>

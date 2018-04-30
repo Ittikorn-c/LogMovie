@@ -113,13 +113,31 @@ nav ul li a.active{
     </section>
 
     <nav>
-        <div class="logo">LogMovie</div>
+        <div class="logo"><a href="/homepage">LogMovie</a></div>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contace</a></li>
-            <li><a class="active" href="#">Log In</a></li>
+            <li><a href="/movies">Movie</a></li>
+            <li><a href="/news">News</a></li>
+            @guest
+              <li><a class="active" href="/login">Log In</a></li>
+            @else
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+            @endguest
         </ul>
     </nav>
 </div>

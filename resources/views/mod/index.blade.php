@@ -55,6 +55,7 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div id="movies" class="container tab-pane active"><br>
+      <a href="/movies/create"><button type="button" class="btn bth-dark" name="button">Create Movie</button></a>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -99,6 +100,7 @@
       </table>
     </div>
     <div id="news" class="container tab-pane fade"><br>
+      <a href="/news/create"><button type="button" class="btn bth-dark" name="button">Create News</button></a>
       <table class="table table-hover">
         <thead>
           <tr>

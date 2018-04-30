@@ -66,7 +66,7 @@ class NewsController extends Controller
           }
         }
         if($upload){
-          return redirect("/news/".$new->id);
+          return redirect("/news/".$news->id);
         }
     }
 

@@ -11,8 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('movies.index');
+Route::get('/', function(){
+  if(\Auth::user()){
+    if(\Auth::user()->role === "user"){
+      return redirect('/homepage');
+    }
+    else if(\Auth::user()->role === "mod"){
+      return redirect('/mod');
+    }
+  }
+  return redirect('/homepage');
 });
 
 Route::resource('/movies', 'MoviesController');
@@ -69,4 +77,3 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 // Other routes
 Route::get('/home', 'HomeController@index')->name('home');
-

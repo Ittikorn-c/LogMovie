@@ -35,11 +35,11 @@ class UserReviewsController extends Controller
      */
     public function store(Request $request)
     {
-      
+
             if(\Auth::user()->role != "user"){
-                return '/';
+                return redirect()->back();
             }
-        
+
         $validatedData = $request->validate([
             'movie_id' => 'required',
             'rate' => 'required',
@@ -65,7 +65,7 @@ class UserReviewsController extends Controller
             }
         }
         else{
-            return "xxx";
+            return  redirect()->back();
         }
     }
 

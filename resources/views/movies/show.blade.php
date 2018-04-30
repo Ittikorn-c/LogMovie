@@ -3,7 +3,7 @@
 @section('header')
     <style>
         section.sec1{
-            
+
             width: 100%;
             height: 100vh;
             background-image: url(../{{ $movie->cover_image }});
@@ -12,16 +12,16 @@
         }
 
         .reviewbox{
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0,0.4); 
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
         }
         .review-content{
             float: right;
@@ -30,7 +30,8 @@
             padding: 20px;
             border: 1px solid #888;
             width: 25%;
-            height: 100%   
+            height: 100%;
+            overflow:auto;
         }
         .close {
             color: #aaaaaa;
@@ -50,8 +51,7 @@
         position: relative;
         height: 50px;
         line-height: 50px;
-        font-size: 40px;
-        border: 1px solid black;
+        font-size: 30px;
         }
 
         .rating label {
@@ -150,7 +150,7 @@
             text-align: center;
             margin: 0;
             padding: 10px 0;
-            
+
             background-image: linear-gradient(to bottom, transparent, lightgray);
         }
 
@@ -161,20 +161,20 @@
     .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item  {
         display: block;
     }
-    
+
     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item,
     .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
         transition: none;
     }
-    
+
     .carousel-inner .carousel-item-next,
     .carousel-inner .carousel-item-prev {
       position: relative;
       transform: translate3d(0, 0, 0);
     }
-    
+
     .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
         position: absolute;
         top: 0;
@@ -183,7 +183,7 @@
         display: block;
         visibility: visible;
     }
-    
+
     /* left or forward direction */
     .active.carousel-item-left + .carousel-item-next.carousel-item-left,
     .carousel-item-next.carousel-item-left + .carousel-item,
@@ -194,7 +194,7 @@
         transform: translate3d(-100%, 0, 0);
         visibility: visible;
     }
-    
+
     /* farthest right hidden item must be abso position for animations */
     .carousel-inner .carousel-item-prev.carousel-item-right {
         position: absolute;
@@ -204,7 +204,7 @@
         display: block;
         visibility: visible;
     }
-    
+
     /* right or prev direction */
     .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
     .carousel-item-prev.carousel-item-right + .carousel-item,
@@ -226,7 +226,7 @@
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+
   overflow: auto;
   background-color: black;
 }
@@ -341,7 +341,7 @@ img.hover-shadow {
 <section class="sec1">
         @if($errors->any())
             <div style="height:100px">
-            
+
             </div>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -355,7 +355,7 @@ img.hover-shadow {
             </div>
         @endif
     <div class="text-head w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
-        {{ $movie->name }} 
+        {{ $movie->name }}
         <br>
         <i class="fa fa-star checked"></i>
         {{ $rate }}
@@ -367,7 +367,7 @@ img.hover-shadow {
 <div id="reviewBox" class="reviewbox">
     <div class="review-content">
     <span class="close">&times;</span>
-        <h1>Review</h1>
+        <h3>Review</h3>
         <div class="card" style="width:100%">
             <img class="card-img-top" src="../{{ $movie->cover_image }}" alt="Card image" style="width:100%; float:left">
             <div class="card-body" style="float:right">
@@ -375,7 +375,7 @@ img.hover-shadow {
             </div>
         </div>
         <hr>
-        <h3>YOUR RATING</h3>
+        <h4>YOUR RATING</h4>
         <form class="rating">
         <label>
             <input type="radio" name="stars" value="1" />
@@ -390,7 +390,7 @@ img.hover-shadow {
             <input type="radio" name="stars" value="3" />
             <span class="icon">★</span>
             <span class="icon">★</span>
-            <span class="icon">★</span>   
+            <span class="icon">★</span>
         </label>
         <label>
             <input type="radio" name="stars" value="4" />
@@ -465,15 +465,15 @@ img.hover-shadow {
         </form>
         <form action="/userreviews" method="post">
         <input hidden type="text" id="rate" name="rate" value="">
-        <input  type="text" id="movie_id" name="movie_id" value="{{ $movie->id }}">
-        <input  type="text" id="user_id" name="user_id" value="">
+        <input hidden type="text" id="movie_id" name="movie_id" value="{{ $movie->id }}">
+        <input hidden type="text" id="user_id" name="user_id" value="">
         {{ csrf_field() }}
-        <h3>YOUR REVIEW</h3>
+        <h4>YOUR REVIEW</h4>
         <input type="text" name="header" class="reviewinput" placeholder="Write a headline for your review here" width="100%">
         <br>
         <textarea name="review" class="reviewinput" cols="30" rows="10" placeholder="Write your review here" width="100%"></textarea>
         <br>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
 </div>
@@ -520,7 +520,7 @@ img.hover-shadow {
             <center><img src="../{{ $pic->image }}"></center>
         </div>
     @endforeach
-    
+
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
@@ -551,7 +551,7 @@ img.hover-shadow {
 <div class="row">
     <h1>User Reviews</h1>
     @if($review !== 0)
-    <p>                      
+    <p>
     @for($i = 0; $i < $review->rate; $i++)
         <span class="fa fa-star checked"></span>
     @endfor
@@ -560,7 +560,7 @@ img.hover-shadow {
     @endfor
     <strong>{{ $review->header }}</strong></p>
     <p>{{ $review->updated_at }} | By <a href="#">{{ $review->user->name }}</a> - <a href="/timelines/{{ $review->user->id }}">See all my reviews</a></p>
-    
+
     <div style="word-wrap: break-word;">
         {{ $review->review }}
     </div>
@@ -592,7 +592,7 @@ var reviewbtn = document.getElementById("reviewBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 reviewbtn.onclick = function() {
     reviewBox.style.display = "block";
 }
@@ -622,7 +622,7 @@ $(".sidebar-box .button").click(function() {
     $p = $el.parent();
     $up = $p.parent();
     $ps = $up.find("p:not('.read-more')");
-    
+
     $ps.each(function() {
         totalHeight += $(this).outerHeight()+100;
     });
@@ -640,12 +640,12 @@ $p.fadeOut();
 return false;
 });
 $('#carouselExample').on('slide.bs.carousel', function (e) {
-    
+
         var $e = $(e.relatedTarget);
         var idx = $e.index();
         var itemsPerSlide = 4;
         var totalItems = $('.carousel-item').length;
-        
+
         if (idx >= totalItems-(itemsPerSlide-1)) {
             var it = itemsPerSlide - (totalItems - idx);
             for (var i=0; i<it; i++) {

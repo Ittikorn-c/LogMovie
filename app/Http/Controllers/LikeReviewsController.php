@@ -35,12 +35,13 @@ class LikeReviewsController extends Controller
      */
     public function store(Request $request)
     {
-        $countlike = LikeReview::where('user_id', '=', '1')->where('review_id', '=', $request->input('review_id'))->count();
+        $user_id = $request->user()->id;
+        $countlike = LikeReview::where('user_id', '=', $user_id)->where('review_id', '=', $request->input('review_id'))->count();
         if($countlike == 0){
             try {
-                
+
                 $likereview = new LikeReview;
-                $likereview->user_id = 1;
+                $likereview->user_id = $request->user()->id;
                 $likereview->review_id = $request->input('review_id');
                 $likereview->save();
                 return  redirect()->back();
@@ -49,7 +50,9 @@ class LikeReviewsController extends Controller
             }
         }
         else{
-            return "OK LIKE";
+          $likeReview = LikeReview::where('user_id', '=', $user_id)->where('review_id', '=', $request->input('review_id'))->get()[0];
+          $this->destroy($likeReview);
+          return  redirect()->back();
         }
     }
 
@@ -95,6 +98,7 @@ class LikeReviewsController extends Controller
      */
     public function destroy(LikeReview $likeReview)
     {
-        //
+      $likeReview->delete();
+      return  redirect()->back();
     }
 }

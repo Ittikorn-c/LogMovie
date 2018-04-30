@@ -26,7 +26,7 @@
 	              </mark>
 	          </div>
 	          <div class="col-sm-6" style="text-align: right;">
-	           
+
 	          </div>
 	        </div>
 	      </h3>
@@ -35,7 +35,6 @@
 	          <div class="card" style="width:250px; margin-left: 3em; margin-top: 3em">
 	            <img class="card-img-top" src="{{ $movie->cover_image }}" alt="Card image" style="width:100%; height: 300px">
 	            <div class="card-body" ><h4 class="card-title">{{ $movie->name }}</h4>
-	              {{ $movie->storyline }}
 	              <br>
 	            </div>
 	            <h4 class="card-footer"><a href="movies/{{ $movie->id }}" class="btn btn-primary">See more...</a></h4>

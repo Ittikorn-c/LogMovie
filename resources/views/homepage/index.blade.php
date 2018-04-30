@@ -53,10 +53,10 @@
               <mark style="background: white;padding: 0px">
                 Movies
               </mark>
-          </div> 
+          </div>
           <div class="col-sm-6" style="text-align: right;">
             <a class="" href="movies" style="font-size: 80%;display: inline;color: white">See all..</a>
-          </div> 
+          </div>
         </div>
       </h3>
       <div class="row" id="myTable" style="margin-left: 5em;">
@@ -65,7 +65,6 @@
             <img class="card-img-top" src="{{ $movie->cover_image }}" alt="Card image" style="width:100%; height: 300px">
             <div class="card-body">
               <h4 class="card-title">{{ $movie->name }}</h4>
-              {{ $movie->storyline }}
               <br>
             </div>
             <h4 class="card-footer"><a href="movies/{{ $movie->id }}" class="btn btn-primary">See more...</a></h4>
@@ -73,7 +72,7 @@
         @endforeach
         <br>
       </div>
-      <br>  
+      <br>
     </div>
     <br>
 
@@ -84,10 +83,10 @@
               <mark style="background: white;padding: 0px">
                 News
               </mark>
-          </div> 
+          </div>
           <div class="col-sm-6" style="text-align: right;">
             <a class="" href="news" style="font-size: 80%;display: inline;color: white">See all..</a>
-          </div> 
+          </div>
         </div>
       </h3>
 
@@ -100,10 +99,10 @@
           <br><br>
         </div>
       @endforeach
-      
-      <br>  
+
+      <br>
     </div>
-  </div> 
+  </div>
 
 
 @endsection
