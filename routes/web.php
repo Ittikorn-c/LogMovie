@@ -22,6 +22,7 @@ Route::get('/timelines/{user}', 'TimeLinesController@show')->where('user', '[0-9
 Route::get('/mod',"ModController@index");
 Route::get('/movies/create','MoviesController@create');
 Route::post('/movies/store','MoviesController@store');
+
 Route::get('/movies/{movie}/edit', 'MoviesController@edit')->where('movie', '[0-9]+');
 Route::put('/movies/{movie}', 'MoviesController@update')->where('movie', '[0-9]+');
 Route::get('/movies/{movie}', 'MoviesController@show')->where('movie', '[0-9]+');
@@ -49,3 +50,14 @@ Route::get('{folder}/{filename}', function ($folder, $filename)
 
     return $response;
 });
+
+// Basic Auth
+Auth::routes();
+
+// OAuth
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+
+// Other routes
+Route::get('/home', 'HomeController@index')->name('home');
