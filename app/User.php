@@ -29,6 +29,15 @@ class User extends Authenticatable
 
     public function socialAccount() {
         return $this->hasMany('App\SocialAccount');
+      }
+    public function scopeReview($query,$id){
+        return $query->join('user_reviews','user_reviews.user_id' ,'=' ,'users.id')
+                     ->join('movies','user_reviews.movie_id','=','movies.id')
+                     ->where('users.id','=', $id)
+                     ->select('movies.name','user_reviews.review');
+    }
+    public function isSuperAdmin(){
+        return $this->role==='admin';
 
     }
 }

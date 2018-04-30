@@ -105,5 +105,18 @@ class LoginController extends Controller
             return $user;
 
         }
+    * The user has been authenticated.
+    * Method copied from "Illumunate\Foundation\Auth\AuthenticateUsers.php"
+    * @param  \Illuminate\Http\Request  $request
+    * @param  mixed  $user
+    * @return mixed
+    */
+    protected function authenticated($request, $user)
+    {
+        if( $user->isSuperAdmin() ){
+            return redirect('/admin/users');
+        }else{
+            return redirect('/');
+        }
     }
 }
