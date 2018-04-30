@@ -29,3 +29,4 @@ Route::get('/news/{news}/edit', 'NewsController@edit')->where('news', '[0-9]+');
 Route::put('/news/{news}', 'NewsController@update')->where('news', '[0-9]+');
 
 Route::get('/home', 'HomesController@index');
+Route::get('/home/search', 'SearchController@index');

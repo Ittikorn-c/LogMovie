@@ -2,16 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Home;
 use App\Movie;
-use App\News;
-use App\ImagesNews;
-use App\ImageMovie;
-// use App\ListMovie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class HomesController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +14,8 @@ class HomesController extends Controller
      */
     public function index()
     {
-        $movies = Movie::orderBy('created_at', 'desc')->take(6)->get();
-        $news = News::orderBy('created_at', 'desc')->take(4)->get();
-
-        return view('home.index', ['movies' => $movies, 'news' => $news]);
+        $movies = Movie::all();
+        return view('home.search', ['movies' => $movies]);
     }
 
     /**
@@ -50,10 +42,10 @@ class HomesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Home  $home
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Home $home)
+    public function show(Movie $movie)
     {
         //
     }
@@ -61,10 +53,10 @@ class HomesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Home  $home
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Home $home)
+    public function edit(Movie $movie)
     {
         //
     }
@@ -73,10 +65,10 @@ class HomesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Home  $home
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Home $home)
+    public function update(Request $request, Movie $movie)
     {
         //
     }
@@ -84,10 +76,10 @@ class HomesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Home  $home
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Home $home)
+    public function destroy(Movie $movie)
     {
         //
     }
