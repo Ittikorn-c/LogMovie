@@ -64,7 +64,6 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 
-<<<<<<< HEAD
 // Other routes
 Route::get('/admin/users', 'UsersController@index');
 Route::get('/admin/users/{user}', 'UsersController@show')->where('user', '[0-9]+');
@@ -101,7 +100,7 @@ Route::get('{folder}/{filename}', function ($folder, $filename)
 
     return $response;
 });
-=======
+
 Route::get('/profile', function () {
     return redirect()->route('profile.show', Auth::id());
 })->middleware('auth');
@@ -117,5 +116,3 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/movielist', function () {
    return view('profile.list', ['user' => Auth::user()]);
 })->name('movielist');
-
->>>>>>> master
