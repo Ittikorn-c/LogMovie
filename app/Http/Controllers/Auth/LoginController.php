@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -98,7 +98,7 @@ class LoginController extends Controller
                     'password' => md5(rand(1,10000)),
                 ]);
             }
-
+            $user->profile()->create();
             $account->user()->associate($user);
             $account->save();
 

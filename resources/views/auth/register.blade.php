@@ -107,7 +107,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
     <script>
         let showPassword = $('#show-password');
         let opacity = showPassword.css('opacity');
@@ -122,4 +122,4 @@
             }
         })
     </script>
-@endsection
+@endpush
