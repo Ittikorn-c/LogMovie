@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mod',"ModController@index");
-Route::get('/movies/create','MoviesController@create');
-Route::post('/movies/store','MoviesController@store');
+//Route::get('/mod',"ModController@index");
+//Route::get('/movies/create','MoviesController@create');
+//Route::post('/movies/store','MoviesController@store');
 
 // Basic Auth
 Auth::routes();
@@ -27,5 +27,19 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 
-// Other routes
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', function () {
+    return redirect()->route('profile.show', Auth::id());
+})->middleware('auth');
+
+
+Route::get('/profile/{id}', 'ProfileController@show')->middleware('auth')->name('profile.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('profile', 'ProfileController')->except(['index', 'show']);
+    Route::get('/account/{id}/edit', 'ProfileController@editAccount')->name('account.edit');
+    Route::post('/updateAvatar', 'ProfileController@updateAvatar')->name('updateAvatar');
+});
+
+Route::get('/movielist', function () {
+   return view('profile.list', ['user' => Auth::user()]);
+})->name('movielist');
+

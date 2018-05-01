@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.swal = require('sweetalert2');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,8 +16,13 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import MovieList from './components/MovieList.vue';
 
-const app = new Vue({
-    el: '#app'
+let movieList = new Vue({
+    template: '<MovieList/>',
+    components: {MovieList},
 });
+
+if (document.getElementById('movie-list') != null) {
+    movieList.$mount('#movie-list');
+}

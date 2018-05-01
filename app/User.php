@@ -31,4 +31,13 @@ class User extends Authenticatable
         return $this->hasMany('App\SocialAccount');
 
     }
+
+    public function profile() {
+        return $this->hasOne('App\Profile');
+    }
+
+    public function userMovie() {
+        return $this->hasMany('App\UserMovie');
+    }
+
 }

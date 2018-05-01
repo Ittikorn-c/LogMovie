@@ -1,0 +1,65 @@
+.card-rounded {
+  border-radius: 20px;
+}
+
+.card-rounded .card-img-top {
+  border-radius: 20px 20px 0 0;
+}
+
+.about {
+  border-bottom: 1px solid #e6cdcd;
+  padding: 15px 25px;
+  display: block;
+  transition: all 0.3s;
+  color: #ef473a !important;
+  cursor: pointer;
+}
+
+.submenu {
+  background: rgba(0, 0, 0, 0.03);
+  color: #805951;
+  li {
+    border-bottom: 1px solid #e7e7fe;
+    padding: 6px 12px 6px 18px;
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
+.card-button {
+  border-bottom: 1px solid #e6cdcd;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: #ef473a;
+}
+
+.card-button:hover {
+  color: #ef473a;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.navbar-toggler {
+  flex: 0;
+}
+
+.stripe {
+  border-bottom: 1px solid #c3c3c3;
+  overflow: auto;
+}
+
+.sidebar {
+  padding: 0;
+}
+
+.sidebar-sticky {
+  position: fixed;
+  padding-top: 50px;
+}
+
+
+
