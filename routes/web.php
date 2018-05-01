@@ -64,6 +64,7 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 
+<<<<<<< HEAD
 // Other routes
 Route::get('/admin/users', 'UsersController@index');
 Route::get('/admin/users/{user}', 'UsersController@show')->where('user', '[0-9]+');
@@ -100,3 +101,21 @@ Route::get('{folder}/{filename}', function ($folder, $filename)
 
     return $response;
 });
+=======
+Route::get('/profile', function () {
+    return redirect()->route('profile.show', Auth::id());
+})->middleware('auth');
+
+
+Route::get('/profile/{id}', 'ProfileController@show')->middleware('auth')->name('profile.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('profile', 'ProfileController')->except(['index', 'show']);
+    Route::get('/account/{id}/edit', 'ProfileController@editAccount')->name('account.edit');
+    Route::post('/updateAvatar', 'ProfileController@updateAvatar')->name('updateAvatar');
+});
+
+Route::get('/movielist', function () {
+   return view('profile.list', ['user' => Auth::user()]);
+})->name('movielist');
+
+>>>>>>> master
