@@ -26,18 +26,9 @@
       box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
       transition: 0.3s;
   }
-  .text-head{
-    font-size: 80px;
-    color: #fff;
-    text-align: center;
-    border: 1px solid #ccc;
-    position: absolute;
-    top: 50%;
-    width: 100%;
-}
   </style>
   <section class="sec1">
-      <div class="text-head" style="background-color: black; opacity: 0.9">
+      <div class="text-head w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
           LOG MOVIE
       </div>
   </section>

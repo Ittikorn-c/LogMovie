@@ -19,17 +19,21 @@ Route::get('/', function(){
     else if(\Auth::user()->role === "mod"){
       return redirect('/mod');
     }
+    else if (\Auth::user()->role === "admin") {
+      return redirect('/admin/users');
+    }
   }
   return redirect('/homepage');
 });
-Route::get('/admin/users', 'UsersController@index');
-Route::get('/admin/users/{user}', 'UsersController@show')->where('user', '[0-9]+');
+
 
 Route::resource('/movies', 'MoviesController');
 Route::resource('/likereviews', 'LikeReviewsController');
 Route::resource('/userreviews', 'UserReviewsController');
 Route::get('/timelines/{user}', 'TimeLinesController@show')->where('user', '[0-9]+');
+
 Route::get('/movies/create','MoviesController@create');
+
 Route::post('/movies/store','MoviesController@store');
 
 Route::get('/mod',"ModController@index");
@@ -52,23 +56,6 @@ Route::get('/homepage/search', 'SearchController@index');
 Route::get('/news/{news}', 'NewsController@show')->where('news', '[0-9]+');
 
 
-Route::get('{folder}/{filename}', function ($folder, $filename)
-{
-    $path = storage_path('app/public/'.$folder.'/' . $filename);
-
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
-
 // Basic Auth
 Auth::routes();
 
@@ -78,7 +65,8 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
 
 // Other routes
-
+Route::get('/admin/users', 'UsersController@index');
+Route::get('/admin/users/{user}', 'UsersController@show')->where('user', '[0-9]+');
 Route::get('/admin/users/{user}/review', 'UsersController@review')->where('user','[0-9]+');
 Route::get('/admin/users/create', 'UsersController@create');
 Route::post('/admin/users', 'UsersController@store');
@@ -95,3 +83,20 @@ Route::get('/admin/news', 'NewsController@adminindex');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('{folder}/{filename}', function ($folder, $filename)
+{
+    $path = storage_path('app/public/'.$folder.'/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});

@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log Movie</title>
 <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel=stylesheet>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -126,6 +127,13 @@ nav ul li a.active{
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  @if(Auth::user()->role === "user")
+                  <a href="/timelines/{{Auth::user()->id}} ">My Blog</a>
+                  @elseif(Auth::user()->role === "mod")
+                    <a href="/mod ">Mod</a>
+                    @elseif(Auth::user()->role === "admin")
+                      <a href="/">Admin</a>
+                  @endif
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">

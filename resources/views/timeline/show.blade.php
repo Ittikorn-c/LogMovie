@@ -5,7 +5,7 @@
     section.sec1{
         width: 100%;
         height: 100vh;
-        background-image: url(../cover_images_movies/cover1524922766.png);
+        background-image: url(/BG/bg.jpg);
         background-size: cover;
         background-position: center;
     }
@@ -35,14 +35,16 @@
                 <div style="border: 1px solid black; padding:5px; border-radius: 5px;">
                     <h2>Introduce</h2>
                     <hr>
-                    <img width="100%" class="" src="../cover_images_movies/cover1524922766.png">
+                    <!-- <img width="100%" class="" src="../cover_images_movies/cover1524922766.png"> -->
+                    <p>{{ $user->name }}</p>
+                    <p>{{ $user->email }}</p>
                 </div>
             </div>
 
             <div class="col-sm-8" style="padding:5px; ">
                 <div style="border: 1px solid black; border-radius: 5px;">
                     <h1>Review</h1>
-                    
+
                     <hr>
                     @foreach($reviews as $review)
                     <center><div class="w3-card-4 w3-margin" style="width:60%;">
@@ -51,7 +53,7 @@
                             <div class="w3-xlarge w3-display-bottomleft w3-padding">{{ $review->movie->name }}</div>
                         </div></a>
                         <div class="w3-row">
-                            <p style="margin: 5px">Rate:                      
+                            <p style="margin: 5px">Rate:
                             @for($i = 0; $i < $review->rate; $i++)
                                 <span class="fa fa-star checked"></span>
                             @endfor
@@ -67,6 +69,10 @@
                             <strong>Review:</strong>
                             {{ $review->review }}
                         </div>
+                        @guest
+                        <p>like this review</p>
+                        <a href="/login"><p>Please Login</p></a>
+                        @else
                         <div class="w3-row">
                             <form id="likeForm-{{$review->id}}" name="likeForm" action="/likereviews" method="post">
                                 <input hidden type="text" id="review_id" name="review_id" value="{{ $review->id }}">
@@ -74,6 +80,7 @@
                                 <p style="margin: 5px"><a href="javascript:{}" onclick="document.getElementById('likeForm-{{$review->id}}').submit();"><i class="far fa-heart"></i></a> Like: {{ $review->countLike() }}</p>
                             </form>
                         </div>
+                        @endguest
                     </div></center>
                     @endforeach
                 </div>

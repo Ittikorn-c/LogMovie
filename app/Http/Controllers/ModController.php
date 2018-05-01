@@ -15,6 +15,9 @@ class ModController extends Controller
      */
     public function index()
     {
+      if(\Auth::user()->role != "mod"){
+          return redirect()->back();
+      }
       $movies = Movie::all();
       $news = News::all();
       return view("mod.index", ["movies" => $movies, "news" => $news]);

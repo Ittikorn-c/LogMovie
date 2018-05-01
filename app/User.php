@@ -37,7 +37,7 @@ class User extends Authenticatable
                      ->select('movies.name','user_reviews.review');
     }
     public function isSuperAdmin(){
-        return $this->role==='admin';
+        return $this->role === 'admin';
 
     }
 }

@@ -108,6 +108,8 @@ class LoginController extends Controller
             return $user;
 
         }
+      }
+    /**
     * The user has been authenticated.
     * Method copied from "Illumunate\Foundation\Auth\AuthenticateUsers.php"
     * @param  \Illuminate\Http\Request  $request
@@ -122,4 +124,5 @@ class LoginController extends Controller
             return redirect('/');
         }
     }
+
 }

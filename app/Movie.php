@@ -16,8 +16,7 @@ class Movie extends Model
 
     public function im() {
         return $this->hasMany('App\ImageMovie', 'movie_id');
-
-    //
+      }
      public function genre(){
     	return $this->belongsTo('App\Genre','id');
     }

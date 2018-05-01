@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\UserReview
+use App\UserReview;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller

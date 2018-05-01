@@ -532,10 +532,18 @@ img.hover-shadow {
         {{ $movie->storyline }}
     </div>
 
+    <div>
+      <p>Genre:
+      @foreach($movie->gen as $gen)
+        {{ $gen->genres }}
+      @endforeach
+      </p>
+    </div>
+
 <hr>
 <div class="row">
     <h1>Box Office</h1>
-    <p>Budget: {{ $movie->budget }}</p>
+    <p>Budget: ${{ $movie->budget }}</p>
     <p>Opening Weekend USA: ${{ $movie->opening }}</p>
     <p>Gross USA: ${{ $movie->gross }}</p>
     <p>Cumulative Worldwide Gross: ${{ $movie->cumulative }}</p>
@@ -564,6 +572,10 @@ img.hover-shadow {
     <div style="word-wrap: break-word;">
         {{ $review->review }}
     </div>
+    @guest
+
+    @else
+    @endguest
     <form id="likeform" name="likeform" action="/likereviews" method="post">
     <input hidden type="text" id="review_id" name="review_id" value="{{ $review->id }}">
     {{ csrf_field() }}
@@ -574,7 +586,7 @@ img.hover-shadow {
     @endif
 
     @guest
-    <p>Review this title</p>
+    <p>Review and like this title</p>
     <a href="/login"><p>Please Login</p></a>
     @else
     <button id="reviewBtn" class=" w3-button w3-teal w3-round-large">Review this title</button>
