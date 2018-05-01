@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);/*!
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);@import url(https://fonts.googleapis.com/css?family=Raleway);/*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10017,25 +10017,45 @@ a.text-dark:focus {
   color: #9b9b9b;
 }
 
-.lm-card {
+.text-ellipsis-twoline {
+  white-space: normal;
+  line-height: 1.45 !important;
+  max-height: 2.8em;
+  overflow: hidden;
+}
+
+.box-shadow {
+  -webkit-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+.philosophy-block {
+  border-top: 1px solid #c3c3c3;
+  border-bottom: 1px solid #c3c3c3;
+}
+
+.lm-card-form {
   position: relative;
-  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
   background-color: white;
-  width: 392px;
   padding: 16px 12px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.lm-card-single {
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  width: 392px;
+  border-radius: 3px;
   margin: 100px auto;
 }
 
-.lm-card .heading {
+.lm-card-single .heading {
   padding: 48px 0 24px;
 }
 
-.lm-card .lm-logo {
+.lm-card-single .lm-logo {
   position: absolute;
   top: -50px;
   left: 0;
@@ -10050,26 +10070,90 @@ a.text-dark:focus {
   border-radius: 50%;
 }
 
-.lm-card label {
+.lm-card-form label {
   font-weight: 600;
   font-size: 12px;
   color: #282828;
 }
 
-.lm-card .checkbox label {
+.lm-card-form .checkbox label {
   display: inline;
 }
 
-.lm-card .heading .link-container {
+.lm-card-form .link-container {
   font-size: 12px;
   color: #282828;
   display: inline-block;
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.lm-register {
+  margin: 64px auto;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  max-width: 788px;
+}
+
+.lm-register .right-side {
+  max-width: 394px;
+  background-color: white;
+  padding: 16px 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+
+.lm-register .left-side {
+  max-width: 394px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#355c7d), color-stop(#6c5b7b), to(#c06c84));
+  background: linear-gradient(to bottom, #355c7d, #6c5b7b, #c06c84);
+  padding: 16px 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 3px 0 0 3px;
+  color: white;
+}
+
+.lm-register .left-side {
+  position: relative;
+}
+
+.lm-register .left-side .pitch,
+.lm-register .left-side .logo {
+  font-family: 'Raleway', "Open Sans", sans-serif;
+  text-align: center;
+}
+
+.lm-register .left-side .logo {
+  margin: 24px auto 12px;
+}
+
+.lm-register .left-side .pitch {
+  margin: 42px 0;
+}
+
+.lm-register .left-side .text-container {
+  margin: 35px auto 15px;
+  color: white;
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 24px;
+  text-align: left;
+  padding: 0 45px 0 30px;
+}
+
+.lm-register .left-side .image-container {
+  position: absolute;
+  background: no-repeat;
+  left: 0;
+  bottom: 0;
+}
+
+.show-password {
+  opacity: .4;
+  cursor: pointer;
 }
 
 .lm-sm-link {
@@ -10078,5 +10162,113 @@ a.text-dark:focus {
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.card-rounded {
+  border-radius: 20px;
+}
+
+.card-rounded .card-img-top {
+  border-radius: 20px 20px 0 0;
+}
+
+.about {
+  border-bottom: 1px solid #e6cdcd;
+  padding: 15px 25px;
+  display: block;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: #ef473a !important;
+  cursor: pointer;
+}
+
+.submenu {
+  background: rgba(0, 0, 0, 0.03);
+  color: #805951;
+}
+
+.submenu li {
+  border-bottom: 1px solid #e7e7fe;
+  padding: 6px 12px 6px 18px;
+}
+
+.submenu svg {
+  margin-right: 5px;
+}
+
+.card-button {
+  border-bottom: 1px solid #e6cdcd;
+  padding: 15px 25px;
+  display: block;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  color: #ef473a;
+}
+
+.card-button:hover {
+  color: #ef473a;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.navbar-toggler {
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
+}
+
+.stripe {
+  border-bottom: 1px solid #c3c3c3;
+  overflow: auto;
+}
+
+.sidebar {
+  padding: 0;
+}
+
+.sidebar-sticky {
+  position: fixed;
+  padding-top: 50px;
+}
+
+a.dropdown-item {
+  cursor: pointer;
+}
+
+.filters a {
+  padding: 8px 12px;
+}
+
+.list-box {
+  border-left: 5px solid #f26b3a;
+  margin-bottom: 30px;
+}
+
+.list-item:nth-child(even) {
+  background: #c9c5c14d;
+}
+
+.list-item .dropdown {
+  padding-right: 12px;
+  margin-left: 6px;
+}
+
+.thumb {
+  display: inline-block;
+  margin: 0 1rem;
+  max-height: 35px;
+  max-width: 35px;
+}
+
+.thumb img {
+  height: 100%;
+  width: 100%;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
