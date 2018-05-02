@@ -122,11 +122,12 @@ nav ul li a.active{
               <li><a class="active" href="/login">Log In</a></li>
             @else
             <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <a style="margin: 0" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a href="/profile">Profile</a>
                   @if(Auth::user()->role === "user")
                   <a href="/timelines/{{Auth::user()->id}} ">My Blog</a>
                   @elseif(Auth::user()->role === "mod")

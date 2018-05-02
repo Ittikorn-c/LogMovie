@@ -567,7 +567,7 @@ img.hover-shadow {
         <span class="fa fa-star"></span>
     @endfor
     <strong>{{ $review->header }}</strong></p>
-    <p>{{ $review->updated_at }} | By <a href="#">{{ $review->user->name }}</a> - <a href="/timelines/{{ $review->user->id }}">See all my reviews</a></p>
+    <p>{{ $review->updated_at }} | By <a href="{{route('profile.show', $review->user->id)}}">{{ $review->user->name }}</a> - <a href="/timelines/{{ $review->user->id }}">See all my reviews</a></p>
 
     <div style="word-wrap: break-word;">
         {{ $review->review }}

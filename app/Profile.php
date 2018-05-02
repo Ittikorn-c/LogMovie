@@ -23,6 +23,6 @@ class Profile extends Model
 
     public function getFormattedDay()
     {
-        return $this->birthday->format('jS F Y');
+        return $this->birthday? $this->birthday->format('jS F Y'):'';
     }
 }

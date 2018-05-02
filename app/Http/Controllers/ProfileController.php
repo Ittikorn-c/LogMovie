@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserReview;
 use Auth;
 use File;
 use Illuminate\Http\Request;
@@ -25,8 +26,10 @@ class ProfileController extends Controller
             $user = Auth::user();
         } else {
             $user = User::findOrFail($id);
+
         }
-        return view('profile.feed', ['user' => $user]);
+        $reviews = UserReview::where("user_id", $user->id)->orderBy('created_at')->get();
+        return view('profile.feed', ['user' => $user, 'reviews' => $reviews]);
     }
 
     /**

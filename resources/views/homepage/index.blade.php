@@ -83,7 +83,7 @@
 
       @foreach ($news as $news)
         <div class="container" style="text-align: center;margin-top: 3em; border-bottom: 1px solid black">
-          <h4>{{ $news->title }}</h4>
+          <h3>{{ $news->title }}</h3>
           <img src="{{ $news->imgs[0]->image }}" style="height: 300px; width: 300px;"> <img src="{{ $news->imgs[1]->image }}" style="height: 300px; width: 300px;margin-left: 1em;box-shadow: 2px 2px">
           <h5>Announce date: {{ $news->created_at->format('d/m/Y H:i:s') }}</h5>
           <a href="news/{{ $news->id }}" class="btn btn-primary">Read more</a>

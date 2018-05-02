@@ -33,7 +33,7 @@
       @foreach ($news as $new)
       <div class="col-sm-3">
         <div class="card">
-          <img class="card-img-top" src="{{ $new->imgs[0]->image }}">
+          <img style="max-height:100px;" class="card-img-top" src="{{ $new->imgs[0]->image }}">
           <div class="card-body">
             <a style="color:black; hover:text-decoration: none;" href="/news/{{ $new->id }}"><h5 class="card-title">{{ $new->title }}</h5></a>
             <p class="card-text"><small class="text-muted">{{ $new->created_at }}</small></p>

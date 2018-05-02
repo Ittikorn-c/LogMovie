@@ -83,6 +83,21 @@ Route::get('/admin/news', 'NewsController@adminindex');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', function () {
+    return redirect()->route('profile.show', Auth::id());
+})->middleware('auth');
+
+
+Route::get('/profile/{id}', 'ProfileController@show')->middleware('auth')->name('profile.show');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('profile', 'ProfileController')->except(['index', 'show']);
+    Route::get('/account/{id}/edit', 'ProfileController@editAccount')->name('account.edit');
+    Route::post('/updateAvatar', 'ProfileController@updateAvatar')->name('updateAvatar');
+});
+
+Route::get('/movielist', function () {
+   return view('profile.list', ['user' => Auth::user()]);
+})->name('movielist');
 
 Route::get('{folder}/{filename}', function ($folder, $filename)
 {
@@ -100,19 +115,3 @@ Route::get('{folder}/{filename}', function ($folder, $filename)
 
     return $response;
 });
-
-Route::get('/profile', function () {
-    return redirect()->route('profile.show', Auth::id());
-})->middleware('auth');
-
-
-Route::get('/profile/{id}', 'ProfileController@show')->middleware('auth')->name('profile.show');
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('profile', 'ProfileController')->except(['index', 'show']);
-    Route::get('/account/{id}/edit', 'ProfileController@editAccount')->name('account.edit');
-    Route::post('/updateAvatar', 'ProfileController@updateAvatar')->name('updateAvatar');
-});
-
-Route::get('/movielist', function () {
-   return view('profile.list', ['user' => Auth::user()]);
-})->name('movielist');

@@ -35,9 +35,11 @@
                 <div style="border: 1px solid black; padding:5px; border-radius: 5px;">
                     <h2>Introduce</h2>
                     <hr>
-                    <!-- <img width="100%" class="" src="../cover_images_movies/cover1524922766.png"> -->
-                    <p>{{ $user->name }}</p>
-                    <p>{{ $user->email }}</p>
+                    <img class="text-center mx-auto d-block" style="border-radius: 50%; width:150px; height:150px"
+                     src="/storage/avatars/{{$user->profile->avatar}}">
+                    <br>
+                    <p><i class="fa fa-user-circle"></i>{{ $user->name }}</p>
+                    <p><i class="fa fa-envelope"></i>{{ $user->email }}</p>
                 </div>
             </div>
 

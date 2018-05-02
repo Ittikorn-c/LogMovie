@@ -109,6 +109,19 @@
   <div class="row content">
     <div class="col-sm-8">
       <div class="main-content">
+
+        <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=241110544128";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+          <div class="fb-share-button" data-href="News Movie" data-layout="button_count"></div>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=LogMovie.com&display=popup"> share this </a>
+
+
         <h1 id='title'>{{ $news->title }}</h1>
         <h3 id="by">by {{ $news->references }}</h3>
         <h6 id='day'>{{ $newsday }}</h6>

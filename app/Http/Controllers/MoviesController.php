@@ -201,7 +201,6 @@ class MoviesController extends Controller
     {
       $validatedData = $request->validate([
         'name' => 'required',
-        'images' => 'required',
         'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'cover_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'vdo' => 'required',
@@ -213,7 +212,6 @@ class MoviesController extends Controller
         'runtime' => 'required|min:0',
         'color' => 'required',
         'aspect_ratio' => 'required',
-        'genres' => 'required',
       ],[]);
 
       $movie->name = $request->input('name');

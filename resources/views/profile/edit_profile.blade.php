@@ -20,7 +20,7 @@
                 <label for="birthday">Date of Birth <span class="text-muted">(Optional)</span></label>
                 <div class="input-group">
                     <input id="birthday" class="form-control" type="date" name="birthday"
-                           value="{{$user->profile->birthday->format("Y-m-d")}}">
+                           value="{{$user->profile->birthday? $user->profile->birthday->format("Y-m-d"): null}}">
                 </div>
             </div>
             <div class="mb-3">

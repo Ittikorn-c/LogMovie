@@ -24,7 +24,17 @@
         <hr>
         <div class="my-3 p-3 bg-white box-shadow">
             <h6 class="border-bottom border-gray pb-2 mb-0">My reviews</h6>
-            <div class="pt-3 text-muted">No reviews</div>
+            @foreach($reviews as $review)
+          
+            <div class="py-3 stripe">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="font-weight-bold">{{$review->header}}</h6>
+                <h6>{{$review->rate}} / 10</h6>
+              </div>
+              <div class="text-muted text-truncate">{{$review->review}}</div>
+              <a href="/movies/.{{ $review->movie->id }}"class="small">{{$review->movie->name}}</a>
+            </div>
+            @endforeach
         </div>
 
         <div class="my-3 p-3 bg-white box-shadow">
@@ -34,4 +44,3 @@
     </div>
 
 @endsection
-
