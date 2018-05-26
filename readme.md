@@ -6,8 +6,8 @@
 3. เปลี่ยนชื่อ file ***.env.example*** to ***.env***
 4. แก้ไข file ***.env***
    - DB_DATABASE=mydatabase_name
-	 - DB_USERNAME=myusername
-	 - DB_PASSWORD=mypassword
+   - DB_USERNAME=myusername
+   - DB_PASSWORD=mypassword
 5. ติดตั้ง vendor 
    ```
    $ composer install
