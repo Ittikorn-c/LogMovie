@@ -26,7 +26,7 @@
    ```
    
 ## Get Started
-   - วิธีสร้าง user ที่เป็น admin และ mod โดย command *** *เนื่องจากในตัวเว็บมีสามารถสมัคร* ***
+   - วิธีสร้าง user ที่เป็น admin และ mod โดย command 
       ```
       $ php artisan tinker
       $user = \App\User::create(['name'=>"user_name", 'email'=>"user_email", 'role'=>"user_role", 'password'=>bcrypt("user_password")])
