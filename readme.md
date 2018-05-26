@@ -1,5 +1,6 @@
-#LogMovie
-##Get Started
+﻿
+# LogMovie
+## Get Started
 
 1. Clone project git clone `https://github.com/Ittikorn-c/LogMovie.git`
 2. สร้าง database และ user 
